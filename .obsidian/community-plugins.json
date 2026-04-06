@@ -1,5 +1,6 @@
 [
   "editing-toolbar",
   "custom-sort",
-  "remember-cursor-position"
+  "remember-cursor-position",
+  "obsidian-reveal-active-file"
 ]
