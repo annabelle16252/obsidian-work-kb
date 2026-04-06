@@ -143,6 +143,7 @@ ssh -N -L localhost:5281:q-pod-ixas34.englab.juniper.net:3389 10.32.192.46
 2.
 Start RDP(Windows APP) to 127.0.0.1:5281 
 JNPRLAB PW:  Gemini@chatgpt.0217
+ixianetowrk is in program files(x86)->ixia
 3.Add license
 q-pod21-vmm:~> vmm serial -t ixia-vm1  (admin/admin) Gemini@chatgpt.0217
 # set license-server 10.49.32.221 '
@@ -166,8 +167,6 @@ Open Ixnetwork
 Ixia download link:
 https://support.ixiacom.com/version/ixnetwork-1000?utm_source=chatgpt.com
 ```
-
-![[Pasted image 20260406173848.png]]
 
 ***VXM--VIXIA
 ```
