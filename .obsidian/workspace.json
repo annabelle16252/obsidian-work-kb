@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Ultra Lab.md",
+                "file": "AI Tools/Github Copilot.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ultra Lab"
+              "title": "Github Copilot"
             }
           }
         ]
@@ -185,6 +185,7 @@
   },
   "active": "c82e47dd4417489d",
   "lastOpenFiles": [
+    "Tools/Ultra Lab.md",
     "Tools/Wireshark.md",
     "Tools/Spirent.md",
     "AI Tools/Github Copilot.md",
@@ -210,7 +211,6 @@
     "Juniper_Knowledge/Segment Routing/SRV6.md",
     "AI Tools/drawio_network_plot.md",
     "Juniper_Knowledge/NAT/NAT.md",
-    "Juniper_Knowledge/PTX/Untitled.md",
     "cVKnowledge/MCP Server/kb-annaw-mcp",
     "cVKnowledge/MCP Server",
     "cVKnowledge",
