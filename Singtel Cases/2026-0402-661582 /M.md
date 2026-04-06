@@ -1,24 +1,11 @@
 
 
 
+----------
 
+Dear Chunxian,
 
+I didnt find any document indicates that offlining/removing the overheated FRU within the 240-second window will explicitly cancel the pending chassis shutdown. The available code confirms the presence of thermal thresholds, chassis over-temperature shutdown logic, and FRU/FPC offline handling, but no direct logic was found stating that an offline/remove action aborts the timer once started.
 
+The most reasonable is that such an action may help only if it clears the chassis over-temperature condition before timer expiry. However, this is not guaranteed, since thermal sensing/state refresh and cooldown are not instantaneous.
 
-
-
-
-
-# Case
-Hi Annabelle,
- 
-1./ We had a call yesterday with Singtel, NCS-Cisco vendor and their customer SATs.
- 
-Summary of the call:
-Cisco has determined that the packet drops is due to CE (SATs) Cisco router COS buffer size issue
-Kaycie suspects that there is an L2 issue between PE (MX-BD-04) to CE (SATs) Cisco router
-Singtel to check further on this issue
- 
-2./ I have informed Singtel of Pranav’s analysis.
- 
-3./ Please keep this ticket under monitoring. Thank you.

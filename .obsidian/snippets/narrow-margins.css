@@ -1,0 +1,11 @@
+/* Obsidian: 左右边距对称收窄 */
+body {
+  --file-line-width: 95vw;
+}
+
+.markdown-preview-view .markdown-preview-section,
+.markdown-source-view.mod-cm6 .cm-sizer {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  max-width: 100% !important;
+}

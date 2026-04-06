@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "type": "group",
+      "ctime": 1775446248296,
+      "items": [],
+      "title": "Tools"
+    },
+    {
+      "type": "group",
+      "ctime": 1775446245431,
+      "items": [
+        {
+          "type": "group",
+          "ctime": 1775446584433,
+          "items": [],
+          "title": "Singtel Process"
+        }
+      ],
+      "title": "Singtel Cases"
+    },
+    {
+      "type": "group",
+      "ctime": 1775446242494,
+      "items": [],
+      "title": "Other_Cases"
+    },
+    {
+      "type": "group",
+      "ctime": 1775446239542,
+      "items": [],
+      "title": "Knowledge"
+    },
+    {
+      "type": "group",
+      "ctime": 1775446234654,
+      "items": [],
+      "title": "Juniper_Knowledge"
+    },
+    {
+      "type": "group",
+      "ctime": 1775446223227,
+      "items": [],
+      "title": "AI Tools"
+    },
+    {
+      "type": "group",
+      "ctime": 1775446230420,
+      "items": [],
+      "title": "Daily"
+    },
+    {
+      "type": "group",
+      "ctime": 1775446226687,
+      "items": [],
+      "title": "attachments"
+    }
+  ]
+}

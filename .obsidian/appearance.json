@@ -1,1 +1,6 @@
-{}
+{
+  "enabledCssSnippets": [
+    "narrow-margins"
+  ],
+  "showRibbon": true
+}
