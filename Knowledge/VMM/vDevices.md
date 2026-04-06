@@ -167,8 +167,7 @@ Ixia download link:
 https://support.ixiacom.com/version/ixnetwork-1000?utm_source=chatgpt.com
 ```
 
-
-
+![[Pasted image 20260406173848.png]]
 
 ***VXM--VIXIA
 ```
