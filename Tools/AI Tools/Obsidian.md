@@ -5,6 +5,8 @@
 
 快捷方式： terminal run
 % obsync
+脚本位置：
+~/.local/bin/obsync
 
 快捷方式包含的命令:
 cd "/Users/annaw/Documents/Obsidian Vault"
