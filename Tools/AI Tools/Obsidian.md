@@ -1,6 +1,7 @@
 # Sync_to_Github
 ```
 频率：每天 1-2 次（比如下班前） 或 每周一次定期备份
+'/Users/annaw/Documents/Obsidian Vault'
 
 快捷方式： terminal run
 % obsync

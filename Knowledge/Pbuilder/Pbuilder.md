@@ -5,15 +5,6 @@ https://junipernetworks.sharepoint.com/:p:/r/teams/Junos/eng-tools/test-tools/pr
 
 Params Enhancement:
 https://junipernetworks.sharepoint.com/:p:/r/teams/RBU/test/platform/PFE%20Platform%20Test%20Engineering/_layouts/15/Doc.aspx?sourcedoc=%7BE9FB0E89-BC9D-439E-973F-F8EA86906592%7D&file=Params%20Enhancements.pptx&action=edit&mobileredirect=true&DefaultItemOpen=1
-
-```
-          r1 ───────r3 ───────r5
-     /                             \
-ce1 ────────────────────────────────────ce2
-     \                             /
-          r2 ───────r4 ───────r6
-```
-
 # SG Groups
 +:(toby-shell-users): ALL
 +:(jdi-all): ALL

@@ -1,6 +1,7 @@
 {
   "enabledCssSnippets": [
-    "narrow-margins"
+    "narrow-margins",
+    "compact-line-spacing"
   ],
   "showRibbon": true
 }

@@ -1,3 +1,26 @@
+2026-0402-661582 - SINGTEL -- SINGNET - NERA - Mitigation when CHASSISD_OVER_TEMP_CONDITION happens
+
+
+
+-------------
+
+
+Hi Annabelle,
+
+Can we ask for some help from escalation or DE to clarify this ?
+
+What I know is in MX2020/2010, MX will be shutting down the individual FRU instead of entire chassis. Since this mechanism exists, I assume that by offline the high temperatures FRU in MX960/480 will mitigate the over temperatures situation for this FRU. It is just not automatic on MX960.
+
+Below is the statement in MX Power Management.pdf in our internal site.
+
+If a FRU starts to overheat, the fan speed is increased and alarms are raised. If the temperature continues to rise and
+reaches a critical level, the FRU is shutdown. The overheating condition is reached when the exhaust sensor temperature
+reading exceeds the High Temperature (HT) threshold. The critical condition is reached when the sensor reading exceeds
+the Over Temperature (OT) threshold. If the FRU remains in critical condition for 240 seconds it will be shut down. If the sensor reading exceeds the Fire Temperature (FT) threshold for 4 seconds it will be shut down on an MX2010/MX2020 whereas the entire chassis will be shut down on an MX240/480/960.
+
+Some old PR also saying the same.
+
+https://gnats.juniper.net/web/default/1245884#audit_tab
 
 
 
@@ -9,3 +32,35 @@ I didnt find any document indicates that offlining/removing the overheated FRU w
 
 The most reasonable is that such an action may help only if it clears the chassis over-temperature condition before timer expiry. However, this is not guaranteed, since thermal sensing/state refresh and cooldown are not instantaneous.
 
+
+
+# Case
+For MX router, we know there is 240s timer countdown to shutdown all the FRUs after Temperature Hot alarm being generate.
+Refer to below syslog from a real temperature related case, the question is if user offline FPC1 within 240s, would the shutdown process be stopped?
+FYI:
+red alarm:
+Any FRU excess the red alarm threshold for 240s continuiously , system will power off the entire router including all FRUs( RE, CB, FPC). Human intervention is needed to power on the router.
+
+chassisd msg:
+(base) huasu@JNPR-MAC-7546XD log % zgrep temper * -r | more
+chassisd:Jul 30 17:44:16 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit     (90 degrees)
+chassisd:Jul 30 17:44:16 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:44:16 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:44:16 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:44:17 CHASSISD_OVER_TEMP_CONDITION: Chassis temperature over 90 degrees C (but no fan/impeller failure detected); routing platform will shutdown in 240 seconds if condition persists
+chassisd:Jul 30 17:44:21 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:44:21 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:44:21 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:44:21 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+
+<....>
+
+chassisd:Jul 30 17:48:52 CHASSISD_OVER_TEMP_CONDITION: Chassis temperature over 90 degrees C (but no fan/impeller failure detected); routing platform will shutdown in 4 seconds if condition persists
+chassisd:Jul 30 17:48:57 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:48:57 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:48:57 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:48:57 CHASSISD_TEMP_HOT_NOTICE: FPC 1 temperature of 91 degrees C is above limit (90 degrees)
+chassisd:Jul 30 17:48:57 CHASSISD_OVER_TEMP_SHUTDOWN_TIME: Chassis temperature above 90 degrees C for too long (> 240 seconds); powering down all FRUs
+chassisd:Jul 30 17:48:57 FPC#0 - power off [addr 0x12] reason: Over temperature
+chassisd:Jul 30 17:48:57 FPC#1 - power off [addr 0x13] reason: Over temperature
+chassisd:Jul 30 17:48:57 FPC#2 - power off [addr 0x14] reason: Over temperature                                                            
