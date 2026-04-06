@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AI Tools/Github Copilot.md",
+                "file": "AI Tools/Obsidian.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Github Copilot"
+              "title": "Obsidian"
             }
           }
         ]
@@ -185,10 +185,11 @@
   },
   "active": "c82e47dd4417489d",
   "lastOpenFiles": [
+    "AI Tools/Github Copilot.md",
+    "AI Tools/Obsidian.md",
     "Tools/Ultra Lab.md",
     "Tools/Wireshark.md",
     "Tools/Spirent.md",
-    "AI Tools/Github Copilot.md",
     "Juniper_Knowledge/Chipset/YT.md",
     "Singtel Cases/Singtel Cases.md",
     "Tools/JTAC Tool.md",
@@ -210,7 +211,6 @@
     "AI Tools/Japanese_tutor.md",
     "Juniper_Knowledge/Segment Routing/SRV6.md",
     "AI Tools/drawio_network_plot.md",
-    "Juniper_Knowledge/NAT/NAT.md",
     "cVKnowledge/MCP Server/kb-annaw-mcp",
     "cVKnowledge/MCP Server",
     "cVKnowledge",
