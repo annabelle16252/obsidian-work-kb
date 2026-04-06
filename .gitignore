@@ -1,0 +1,10 @@
+
+# 敏感文件 - 永远不要提交
+*.apikey
+*.key
+*.secret
+*credentials*
+*token*
+*auth*
+.env
+.env.local
