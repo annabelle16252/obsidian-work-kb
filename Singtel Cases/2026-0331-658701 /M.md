@@ -3,6 +3,30 @@
 
 https://speechify.com/auth/action?mode=resetPassword&oobCode=X-xLZRt9XkzZ_in1q3Bcp-B1vVjsp5T5G-EcSkYimpAAAAGdRrHPPw&apiKey=AIzaSyCv4J_Ocg6jrsSW-nUkSfPmuuxyUrcc-RM&lang=en
 
+
+
+
+
+
+Hi Pieter,
+
+I am still waiting for Singtel to update on the status.
+
+I have ask them about it this morning.
+
+------------
+
+
+Hi Chee Loong, 
+
+What is the current status of this issue? Please let me know if any additional support is required from our side. 
+
+Thanks,
+
+Pieter Van Houwelingen
+
+------------
+
 Hi Annabelle,
  
 1./ We had a call yesterday with Singtel, NCS-Cisco vendor and their customer SATs.
