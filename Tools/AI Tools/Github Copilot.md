@@ -3,7 +3,7 @@
 1. **github.hpe.com** — `ying-wang` 账户（企业GitHub）<<<企业敏感数据
 2. **github.com** — `ying-wang_hpeprod` 账户（公共GitHub上的HPE账户） <<< 搭配copilot最方便
 私人GitHub:
-annabelle16252
+annabelle16252 icallthisdestiny@hotmail.com
 
 
 

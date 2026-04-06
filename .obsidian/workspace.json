@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "80ddf26c2cd98ec6",
+        "id": "ba48d74e4cea6d92",
         "type": "tabs",
         "children": [
           {
-            "id": "c82e47dd4417489d",
+            "id": "a0d8bd79c95afb99",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AI Tools/Obsidian.md",
+                "file": "Tools/AI Tools/Obsidian.md",
                 "mode": "source",
                 "source": false
               },
@@ -40,7 +40,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
+                "sortOrder": "alphabeticalReverse",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -94,9 +94,8 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Welcome.md",
                 "collapseAll": false,
-                "extraContext": false,
+                "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
@@ -104,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Welcome"
+              "title": "Backlinks"
             }
           },
           {
@@ -113,12 +112,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Welcome.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Welcome"
+              "title": "Outgoing links"
             }
           },
           {
@@ -156,21 +154,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Welcome.md",
+                "file": "Tools/AI Tools/Obsidian.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Welcome"
+              "title": "Outline of Obsidian"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -180,56 +178,57 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "custom-sort:Toggle custom sorting": false
     }
   },
-  "active": "c82e47dd4417489d",
+  "active": "a0d8bd79c95afb99",
   "lastOpenFiles": [
-    "AI Tools/Github Copilot.md",
-    "AI Tools/Obsidian.md",
+    "Tools/AI Tools/Github Copilot.md",
+    "Tools/AI Tools/Obsidian.md",
+    "Tools/Spirent.md",
+    "Pasted image 20260406124715.png",
+    "Pasted image 20260406124700.png",
+    "Pasted image 20260406124633.png",
+    "Tools/AI Tools/AI Tools.md",
+    "sortspec.md",
     "Tools/Ultra Lab.md",
     "Tools/Wireshark.md",
-    "Tools/Spirent.md",
-    "Juniper_Knowledge/Chipset/YT.md",
-    "Singtel Cases/Singtel Cases.md",
     "Tools/JTAC Tool.md",
-    "Singtel Process/Singtel Process.md",
-    "Singtel Process/Singtel.md",
-    "Singtel Process/Network.md",
-    "Singtel Process/Meetings.md",
-    "Singtel Process/ARC-Japan.md",
-    "Singtel Cases/2026-0402-661582 /M.md",
-    "Singtel Cases/2026-0402-661582 /2026-0402-661582.md",
-    "Singtel Cases/2026-0402-661582/M.md",
-    "Singtel Cases/2025-1106-931202/2025-1106-931202.md",
+    "Tools/Process.md",
+    "Tools/Linux.md",
+    "Singtel Cases/Singtel Process/Singtel Cases.md",
+    "Singtel Cases/Singtel Process/Singtel.md",
+    "Singtel Cases/Singtel Process/Singtel Process.md",
+    "Singtel Cases/Singtel Process/Network.md",
+    "Singtel Cases/2025-1021-908930/M.md",
+    "Singtel Cases/2025-1222-002440/2025-1222-002440.md",
+    "Singtel Cases/2025-1217-985420/2025-1217-985420.md",
+    "Singtel Cases/2025-1216-983619/O.md",
+    "Singtel Cases/2025-1208-973536/O.md",
+    "Singtel Cases/2025-1208-973736/M.md",
+    "Singtel Cases/2025-1208-973736/O.md",
     "Singtel Cases/2025-1030-921936/2025-1030-921936.md",
-    "Juniper_Knowledge/Chipset/Express.md",
-    "Juniper_Knowledge/Chipset/BT.md",
-    "Juniper_Knowledge/NAT/AMS.md",
-    "Juniper_Knowledge/OS/EVO.md",
-    "AI Tools/topology-tool.html.md",
-    "AI Tools/Japanese_tutor.md",
-    "Juniper_Knowledge/Segment Routing/SRV6.md",
-    "AI Tools/drawio_network_plot.md",
-    "cVKnowledge/MCP Server/kb-annaw-mcp",
-    "cVKnowledge/MCP Server",
-    "cVKnowledge",
-    "JSingtel Cases/2025-1008-891148",
-    "JSingtel Cases",
-    "ESingtel Cases/2025-1008-891148",
-    "ESingtel Cases",
-    "9Knowledge/Aruba",
-    "9Knowledge",
-    "8Other_Cases/2026-0323-648635",
+    "Singtel Cases/2025-1203-967246/2025-1203-967246.md",
+    "Singtel Cases/2025-1119-949221/Escalation.md",
+    "Singtel Cases/2025-1119-949221/KB104942.md",
+    "Singtel Cases/2025-1107-932910/2025-1107-932910.md",
     "attachments/Pasted image 20260405125205.png",
     "attachments/Pasted image 20260405094019.png",
     "attachments/Pasted image 20260404105923.png",
     "attachments/Pasted image 20260404105000.png",
     "attachments/Pasted image 20260401083902.png",
-    "attachments/Pasted image 20260328132825.png",
     "attachments/Pasted image 20260331081018.png",
-    "attachments/Pasted image 20260324074901.png",
-    "attachments/Pasted image 20260323152009.png",
-    "attachments/Pasted image 20260317143011.png"
+    "attachments/Pasted image 20260328132825.png",
+    "attachments",
+    "NGTV/2026-0218-501390",
+    "NGTV",
+    "Juniper_Knowledge/Telemetry",
+    "Juniper_Knowledge/Segment Routing",
+    "Juniper_Knowledge/Script",
+    "Juniper_Knowledge/QFX",
+    "Juniper_Knowledge/PTX",
+    "Juniper_Knowledge/OS",
+    "Juniper_Knowledge/NAT"
   ]
 }
