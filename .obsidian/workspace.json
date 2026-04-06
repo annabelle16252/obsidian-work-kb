@@ -1,0 +1,235 @@
+{
+  "main": {
+    "id": "3c65a7ef3ec5c1d3",
+    "type": "split",
+    "children": [
+      {
+        "id": "80ddf26c2cd98ec6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c82e47dd4417489d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tools/Ultra Lab.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ultra Lab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d001ba333181680f",
+    "type": "split",
+    "children": [
+      {
+        "id": "2d95ae87afbcda0a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b5b045345513cf77",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "5d21daa8a9dfdaa6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "40f6b3b64aee8563",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "09321adc72668c9a",
+    "type": "split",
+    "children": [
+      {
+        "id": "cce040783b5c2112",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8308c8901b6d1b56",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Welcome.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Welcome"
+            }
+          },
+          {
+            "id": "d0c64855228c411a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Welcome.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Welcome"
+            }
+          },
+          {
+            "id": "88c128283179b53a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "b6b7b3a521639ed7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "32519c424778e551",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Welcome.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Welcome"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "c82e47dd4417489d",
+  "lastOpenFiles": [
+    "Tools/Wireshark.md",
+    "Tools/Spirent.md",
+    "AI Tools/Github Copilot.md",
+    "Juniper_Knowledge/Chipset/YT.md",
+    "Singtel Cases/Singtel Cases.md",
+    "Tools/JTAC Tool.md",
+    "Singtel Process/Singtel Process.md",
+    "Singtel Process/Singtel.md",
+    "Singtel Process/Network.md",
+    "Singtel Process/Meetings.md",
+    "Singtel Process/ARC-Japan.md",
+    "Singtel Cases/2026-0402-661582 /M.md",
+    "Singtel Cases/2026-0402-661582 /2026-0402-661582.md",
+    "Singtel Cases/2026-0402-661582/M.md",
+    "Singtel Cases/2025-1106-931202/2025-1106-931202.md",
+    "Singtel Cases/2025-1030-921936/2025-1030-921936.md",
+    "Juniper_Knowledge/Chipset/Express.md",
+    "Juniper_Knowledge/Chipset/BT.md",
+    "Juniper_Knowledge/NAT/AMS.md",
+    "Juniper_Knowledge/OS/EVO.md",
+    "AI Tools/topology-tool.html.md",
+    "AI Tools/Japanese_tutor.md",
+    "Juniper_Knowledge/Segment Routing/SRV6.md",
+    "AI Tools/drawio_network_plot.md",
+    "Juniper_Knowledge/NAT/NAT.md",
+    "Juniper_Knowledge/PTX/Untitled.md",
+    "cVKnowledge/MCP Server/kb-annaw-mcp",
+    "cVKnowledge/MCP Server",
+    "cVKnowledge",
+    "JSingtel Cases/2025-1008-891148",
+    "JSingtel Cases",
+    "ESingtel Cases/2025-1008-891148",
+    "ESingtel Cases",
+    "9Knowledge/Aruba",
+    "9Knowledge",
+    "8Other_Cases/2026-0323-648635",
+    "attachments/Pasted image 20260405125205.png",
+    "attachments/Pasted image 20260405094019.png",
+    "attachments/Pasted image 20260404105923.png",
+    "attachments/Pasted image 20260404105000.png",
+    "attachments/Pasted image 20260401083902.png",
+    "attachments/Pasted image 20260328132825.png",
+    "attachments/Pasted image 20260331081018.png",
+    "attachments/Pasted image 20260324074901.png",
+    "attachments/Pasted image 20260323152009.png",
+    "attachments/Pasted image 20260317143011.png"
+  ]
+}
