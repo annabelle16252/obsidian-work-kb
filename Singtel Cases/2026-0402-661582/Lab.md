@@ -1,6 +1,8 @@
 
 
-
+15:20:23 -- test chassis fan all speed 100  
+  15:20:28 -- test chassis fan all speed 10
+  你先做好event 然后直接0
 
 
 blocking air flow` 或 `removing fan tray for a while`（短时间挡风/拔风扇托盘来制造过温）
