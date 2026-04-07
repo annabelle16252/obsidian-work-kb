@@ -2,6 +2,8 @@
 /volume/case_2026/2026-0402-661582
 /volume/CSdata/annaw/case/2026-0402-661582
 
+
+
 Mitigation when CHASSISD_OVER_TEMP_CONDITION happens
 这个case，我们想知道如果把高温的FPC offline了，shutdown process是不是会停了
 

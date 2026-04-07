@@ -1,6 +1,13 @@
 /volume/case_2026/
 /volume/CSdata/annaw/case/
-/volume/ftp/case/
+
+Juniper case analysis request
+Issue: 
+log path:
+Task: 
+1.
+2.
+3.
 
 # Sync case log to local PC#
 MAC terminal run:
