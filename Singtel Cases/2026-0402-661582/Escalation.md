@@ -10,6 +10,7 @@ Hi Annabelle,
 
 It should...you or Su can try in the lab, by configuring some event options and blocking air flow or removing fan tray for a while. Event script would be better to get the FPC slot number from the syslog, or you may have to cover all the slots under event-options.
 
+```
 [edit]
 
 labroot@radiomir-re0# show event-options 
@@ -41,6 +42,7 @@ policy proactive-offline-overtemp {
     }
 
 }
+```
 
 Best regards,
 

@@ -1,13 +1,40 @@
+
+
+
+
+
+blocking air flow` 或 `removing fan tray for a while`（短时间挡风/拔风扇托盘来制造过温）
+
+
+1. 在目标 FPC 的进/出风区域做局部挡风（小面积、短时间），不要挡整机风道。
+2. 同时在目标 FPC 端口打高流量，让它自身发热更快。
+
+
+3. 风扇位置：图最下方整块黑色栅格区域（前面板底部）就是风扇/进风区域。
+4. 主要散热区域：风从底部进风后经过中间 FPC/MPC 板卡区（你插 MPC 的区域）再被机框风道带走。
+5. 你做过温实验时，重点关注中间板卡区对应槽位（比如 FPC0）和底部风扇区气流是否受阻。
+
+
+https://www.juniper.net/documentation/us/en/hardware/mx960/index.html
+![[Pasted image 20260407094408.png]]
+
+0-5， re ， 7-11
+机框风道和该槽位附近气流
 # Topo
-jtac-mx480-r2033 10.219.35.20
-jtac-mx480-r2607 10.219.34.198
+FPC 0 REV 07 750-063741 CAGZ2064 MPCE Type 2 3D Q
 
-labroot@jtac-mx480-r2033-re0> show lldp neighbors   
-Local Interface    Parent Interface    Chassis Id          Port info          System Name
-ge-0/2/0           -                   10:0e:7e:3f:b9:c0   651                jtac-mx480-r2607-re0.ultralab.juniper.net
-ge-0/2/1           -                   10:0e:7e:3f:b9:c0   653                jtac-mx480-r2607-re0.ultralab.juniper.net
+Dear Team,
 
-labroot@jtac-mx480-r2607-re0> show lldp neighbors    
-Local Interface    Parent Interface    Chassis Id          Port info          System Name
-ge-0/2/0           -                   30:b6:4f:e6:7a:c0   533                jtac-mx480-r2033-re0.ultralab.juniper.net
-ge-0/2/1           -                   30:b6:4f:e6:7a:c0   537                jtac-mx480-r2033-re0.ultralab.juniper.net
+Could you help to arrange a MX960 for FPC temperature test?
+
+Need one MX960 with two MPCE Type 2 3D Q cards in slot 6 & slot 9.  Please help to block the slot 6 FPC's air flow to make its temperature going high.
+
+Please contact me via Teams so that we can do the test together.
+
+Thanks
+Annabelle
+
+
+dont touch fpc， too hot
+
+show log messages | match "CHASSISD_TEMP_HOT_NOTICE|CHASSISD_OVER_TEMP_CONDITION|CHASSISD_OVER_TEMP_SHUTDOWN_TIME"
