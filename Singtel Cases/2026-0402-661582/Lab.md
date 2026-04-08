@@ -1,10 +1,66 @@
 
 
 15:20:23 -- test chassis fan all speed 100  
-  15:20:28 -- test chassis fan all speed 10
-  你先做好event 然后直接0
+  15:20:28 -- test chassis fan all speed 0
 
 
+```
+> show chassis fpc 6 | refresh 1 
+> show chassis environment | match "FPC 6" 
+> test chassis fan all speed 50  <<< only change top fan
+> test chassis fan front-bottom-fan-tray speed 0
+> 
+> 
+> 
+> 
+> 
+> 
+
+
+
+labroot@jtac-mx960-r2038-re0> test chassis fan all speed normal 
+error: A blower is missing, fans must run full speed
+
+
+```
+
+
+
+```
+
+1. Execute any of below command to make the chassis temperature going high:
+> test chassis fan front-bottom-fan-tray speed 10  
+> test chassis fan all speed 0  
+
+2.I have below event-option configured on device to offline the FPC to cool down the temperature:
+<<<
+set event-options policy proactive-offline-overtemp events chassisd_temp_hot_notice
+set event-options policy proactive-offline-overtemp within 180 events chassisd_over_temp_condition
+set event-options policy proactive-offline-overtemp attributes-match chassisd_temp_hot_notice.message matches "FPC 6"
+set event-options policy proactive-offline-overtemp then execute-commands commands "request chassis fpc slot 6 offline"
+<<<
+
+3.Then wait for 240s to see if it can stop the chassis from shutdown.
+(If no step 2 action, chassis willb e shut down in 240s)
+
+4.Once I see my event-option has effect, I will proceed below to make fan working back to normal:
+> test chassis fan all speed 100 
+
+
+
+> 
+labroot@messi-re0> test chassis fan ?
+Possible completions:
+  all                  Set speed of all fans
+  front-bottom-fan-tray  Set speed of fans in bottom front fan tray
+  front-top-fan-tray   Set speed of fans in top front fan tray
+  no-forwarding        No forwarding
+  speed                Set fan speed
+  
+  
+  
+  
+```
 blocking air flow` 或 `removing fan tray for a while`（短时间挡风/拔风扇托盘来制造过温）
 
 
@@ -18,7 +74,7 @@ blocking air flow` 或 `removing fan tray for a while`（短时间挡风/拔�
 
 
 https://www.juniper.net/documentation/us/en/hardware/mx960/index.html
-![[Pasted image 20260407094408.png]]
+
 
 0-5， re ， 7-11
 机框风道和该槽位附近气流

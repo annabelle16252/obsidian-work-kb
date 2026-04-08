@@ -3,6 +3,28 @@
 
 
 
+
+
+
+3 should work. And/or just remove both of the fan trays ;>
+
+---------------
+
+Dear Shin,
+
+Thanks for checking the case.
+
+I tried in lab (jtac-mx960-r2038/10.219.23.134), but failed to emulate the FPC temperature high:
+1.use command 'test chassis fan all speed 0', but only can make top fan try speed to 0 and all bottom fan try speed are around 3000rpm. This wont make FPC6 (the only online fpc without any traffic) temperature higher than 70C.
+
+2.Lab team removed bottom fan tray, but 'test chassis fan all speed 0' wont work,  all the top fan always run at full speed around 5k rpm.
+
+3.Lab team will block air flow tomorrow for me and it will make the whole chassis temp going high possibly. 
+
+Would you have any suggestion on the current and next step test? 
+
+
+
 ------------
 
 
