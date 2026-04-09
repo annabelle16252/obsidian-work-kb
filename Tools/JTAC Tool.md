@@ -2,12 +2,11 @@
 /volume/CSdata/annaw/case/
 
 Juniper case analysis request
-Issue: 
-log path:
+Issue: event-option of FPC6 over temperature didnt triggered fpc 6 offline action.
+log path: pls ssh to jtac-mx960-r2038 and check the logs
 Task: 
-1.
-2.
-3.
+1.why event-option  was not triggered
+
 
 # Sync case log to local PC#
 MAC terminal run:

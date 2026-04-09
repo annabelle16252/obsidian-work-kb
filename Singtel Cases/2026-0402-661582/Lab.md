@@ -18,8 +18,14 @@
 
 
 
-labroot@jtac-mx960-r2038-re0> test chassis fan all speed normal 
-error: A blower is missing, fans must run full speed
+
+
+Apr  9 09:18:12.457  jtac-mx960-r2038-re0 chassisd[31223]: CHASSISD_TEMP_HOT_NOTICE: FPC 6:Exhaust B temperature of 81 degrees C is above limit (80 degrees)
+
+Apr  9 09:18:12.812  jtac-mx960-r2038-re0 chassisd[31223]: CHASSISD_OVER_TEMP_CONDITION: Chassis found temperature above over_temp condition temperature at one or more sensors (fan/impeller failure detected); routing platform will shutdown in 240 seconds if condition persists
+
+
+
 
 
 ```

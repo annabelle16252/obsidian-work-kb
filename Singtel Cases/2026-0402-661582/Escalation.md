@@ -1,8 +1,33 @@
 
+1.Blocked air flow, temp went high very slow
+2.remove top fan tray 
+
+```
+---(refreshed at 2026-04-09 09:22:11 IST)---
+                     Temp  CPU Utilization (%)   CPU Utilization (%)  Memory    Utilization (%)
+Slot State            (C)  Total  Interrupt      1min   5min   15min  DRAM (MB) Heap     Buffer
+  6  Online            69      6          0        5      5      5    3584        7         25
+---(refreshed at 2026-04-09 09:22:12 IST)---
+                     Temp  CPU Utilization (%)   CPU Utilization (%)  Memory    Utilization (%)
+Slot State            (C)  Total  Interrupt      1min   5min   15min  DRAM (MB) Heap     Buffer
+  6  Online            69      6          0        5      5      5    3584        7         25
+
+
+
+Apr  9 09:22:07.857  jtac-mx960-r2038-re0 chassisd[31223]: CHASSISD_TEMP_HOT_NOTICE: FPC 6:Exhaust B temperature of 88 degrees C is above limit (80 degrees)
+Apr  9 09:22:07.859  jtac-mx960-r2038-re0 chassisd[31223]: CHASSISD_TEMP_HOT_NOTICE: FPC 6:Intake temperature of 87 degrees C is above limit (80 degrees)
+Apr  9 09:22:12.864  jtac-mx960-r2038-re0 chassisd[31223]: CHASSISD_TEMP_HOT_NOTICE: FPC 6:Exhaust B temperature of 89 degrees C is above limit (80 degrees)
+Apr  9 09:22:12.866  jtac-mx960-r2038-re0 chassisd[31223]: CHASSISD_TEMP_HOT_NOTICE: FPC 6:Intake temperature of 87 degrees C is above limit (80 degrees)
+
+Apr  9 09:22:13.222  jtac-mx960-r2038-re0 chassisd[31223]: CHASSISD_OVER_TEMP_SHUTDOWN_TIME: Chassis temperature above 80 degrees C for too long  (> 240 seconds); powering down all FRUs
 
 
 
 
+
+```
+
+-----------
 
 
 
