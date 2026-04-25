@@ -1,5 +1,5 @@
 /volume/case_2026/2026-0413-672364
-/volume/CSdata/annaw/case/2026-0323-648596
+/volume/CSdata/annaw/case/2026-0413-672364
 
 Hostname: FFTEQ-BB1
 Model: mx960

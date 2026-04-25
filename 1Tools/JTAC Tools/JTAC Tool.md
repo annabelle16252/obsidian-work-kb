@@ -1,30 +1,6 @@
 /volume/case_2026/2026-0323-648596
 /volume/CSdata/annaw/case/2026-0323-648596
 
-# rsi-explore
-```
-uvx --from git+ssh://git@github.hpe.com/ying-wang/rsi-explorer-JTAC.git@v1.4.3 \
-  rsi-cli --remote-host 10.104.8.126 --remote-user annaw \
- "/volume/CSdata/annaw/case/2026-0413-672364/20260413-FFTEQ-BB1-RSI.log"
- 
-```
-# AI_log_analysis
-Juniper case analysis request
-Issue: event-option of FPC6 over temperature didnt triggered fpc 6 offline action.
-log path: pls ssh to jtac-mx960-r2038 and check the logs
-Task: 
-1.why event-option  was not triggered
-
-# 给文件读写权限permission
-chmod -R a+rx *  给所有文件加权限
-annaw@svl-jtac-lnx05:/volume/CSdata/annaw/case$  chmod -R a+rx 2020-0927-0317
-$ chmod -R 777 /volume/CSdata/annaw/case/2021-1018-343196/
-
-# 解压文件 #
-1.把tgz文件拷到目录**下，mkdir一个同名folder
-2.把tgz文件mv到这个新folder下
-3.进入这个foler
-```
 > tar -zxvf    + xxx.tgz文件
 > tar -xvf  xxx.tar文件
 > unrar + xxx.rar / unrar e xxx.rar
