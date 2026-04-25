@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ba48d74e4cea6d92",
+        "id": "4858b57fd83fd977",
         "type": "tabs",
         "children": [
           {
-            "id": "a0d8bd79c95afb99",
+            "id": "1f42a3d9f9550050",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/AI Tools/Obsidian.md",
+                "file": "5Daily/temp.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Obsidian"
+              "title": "temp"
             }
           }
         ]
@@ -40,7 +40,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabeticalReverse",
+                "sortOrder": "alphabetical",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": " ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 271.50390243530273
   },
   "right": {
     "id": "09321adc72668c9a",
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tools/AI Tools/Obsidian.md",
+                "file": "5Daily/temp.md",
                 "followCursor": false,
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Obsidian"
+              "title": "Outline of temp"
             }
           }
         ],
@@ -182,53 +182,53 @@
       "custom-sort:Toggle custom sorting": false
     }
   },
-  "active": "a0d8bd79c95afb99",
+  "active": "b5b045345513cf77",
   "lastOpenFiles": [
-    "Tools/AI Tools/Github Copilot.md",
-    "Tools/AI Tools/Obsidian.md",
-    "Tools/Spirent.md",
-    "Pasted image 20260406124715.png",
-    "Pasted image 20260406124700.png",
-    "Pasted image 20260406124633.png",
-    "Tools/AI Tools/AI Tools.md",
-    "sortspec.md",
-    "Tools/Ultra Lab.md",
-    "Tools/Wireshark.md",
-    "Tools/JTAC Tool.md",
-    "Tools/Process.md",
-    "Tools/Linux.md",
-    "Singtel Cases/Singtel Process/Singtel Cases.md",
-    "Singtel Cases/Singtel Process/Singtel.md",
-    "Singtel Cases/Singtel Process/Singtel Process.md",
-    "Singtel Cases/Singtel Process/Network.md",
-    "Singtel Cases/2025-1021-908930/M.md",
-    "Singtel Cases/2025-1222-002440/2025-1222-002440.md",
-    "Singtel Cases/2025-1217-985420/2025-1217-985420.md",
-    "Singtel Cases/2025-1216-983619/O.md",
-    "Singtel Cases/2025-1208-973536/O.md",
-    "Singtel Cases/2025-1208-973736/M.md",
-    "Singtel Cases/2025-1208-973736/O.md",
-    "Singtel Cases/2025-1030-921936/2025-1030-921936.md",
-    "Singtel Cases/2025-1203-967246/2025-1203-967246.md",
-    "Singtel Cases/2025-1119-949221/Escalation.md",
-    "Singtel Cases/2025-1119-949221/KB104942.md",
-    "Singtel Cases/2025-1107-932910/2025-1107-932910.md",
-    "attachments/Pasted image 20260405125205.png",
-    "attachments/Pasted image 20260405094019.png",
-    "attachments/Pasted image 20260404105923.png",
-    "attachments/Pasted image 20260404105000.png",
-    "attachments/Pasted image 20260401083902.png",
-    "attachments/Pasted image 20260331081018.png",
-    "attachments/Pasted image 20260328132825.png",
-    "attachments",
-    "NGTV/2026-0218-501390",
-    "NGTV",
-    "Juniper_Knowledge/Telemetry",
-    "Juniper_Knowledge/Segment Routing",
-    "Juniper_Knowledge/Script",
-    "Juniper_Knowledge/QFX",
-    "Juniper_Knowledge/PTX",
-    "Juniper_Knowledge/OS",
-    "Juniper_Knowledge/NAT"
+    "2Cases/Other Cases/2026-0417-678815/Lab.md",
+    "2Cases/Other Cases/2026-0417-678815/M.md",
+    "2Cases/Other Cases/2026-0417-678815/Escalation.md",
+    "2Cases/1Singtel Cases/Singtel Process/Singtel.md",
+    "2Cases/1Singtel Cases/Singtel Process/Network.md",
+    "2Cases/1Singtel Cases/Singtel Process/Meetings.md",
+    "2Cases/1Singtel Cases/Singtel Process/ARC-Japan.md",
+    "2Cases/1Singtel Cases/2026-0402-661582/O.md",
+    "2Cases/1Singtel Cases/2026-0402-661582/M.md",
+    "2Cases/1Singtel Cases/2026-0402-661582/Lab.md",
+    "2Cases/1Singtel Cases/2026-0402-661582/Escalation.md",
+    "2Cases/1Singtel Cases/2026-0413-672364/O.md",
+    "2Cases/1Singtel Cases/2026-0413-672364/M.md",
+    "2Cases/1Singtel Cases/2026-0331-658701/O.md",
+    "2Cases/1Singtel Cases/2026-0331-658701/M.md",
+    "2Cases/1Singtel Cases/2026-0422-685188/O.md",
+    "2Cases/1Singtel Cases/2026-0422-685188/M.md",
+    "2Cases/1Singtel Cases/2026-0206-184055/O.md",
+    "2Cases/1Singtel Cases/2026-0206-184055/M.md",
+    "2Cases/1Singtel Cases/2026-0312-632353/M.md",
+    "2Cases/1Singtel Cases/2026-0312-632353/2026-0312-632353.md",
+    "2Cases/1Singtel Cases/2026-0318-643131/2026-0318-643131.md",
+    "2Cases/1Singtel Cases/2026-0216-425170/O.md",
+    "2Cases/1Singtel Cases/2026-0310-628387/O.md",
+    "2Cases/1Singtel Cases/2026-0310-628387/Meeting.md",
+    "2Cases/1Singtel Cases/2026-0310-628387/M.md",
+    "2Cases/Other Cases/2026-0417-678815",
+    "2Cases/1Singtel Cases/Singtel Process",
+    "2Cases/1Singtel Cases/2026-0422-685188",
+    "2Cases/1Singtel Cases/2026-0413-672364",
+    "2Cases/1Singtel Cases/2026-0402-661582",
+    "2Cases/1Singtel Cases/2026-0331-658701",
+    "2Cases/1Singtel Cases/2026-0318-643131",
+    "2Cases/1Singtel Cases/2026-0312-632353",
+    "2Cases/1Singtel Cases/2026-0312-632154",
+    "2Cases/1Singtel Cases/2026-0310-628387",
+    "attachments/Pasted image 20260424112918.png",
+    "attachments/Pasted image 20260423195331.png",
+    "attachments/Pasted image 20260423081242.png",
+    "attachments/Pasted image 20260422140402.png",
+    "attachments/Pasted image 20260422114040.png",
+    "attachments/Pasted image 20260418121209.png",
+    "attachments/Pasted image 20260421194558.png",
+    "attachments/Pasted image 20260421184401.png",
+    "attachments/Pasted image 20260421180811.png",
+    "attachments/Pasted image 20260421175454.png"
   ]
 }

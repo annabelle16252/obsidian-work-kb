@@ -7,6 +7,12 @@ This is Annabelle Wang from Japan CFTS Team and I will be assisting you with you
 I will go through the case and provide you and update later.
 
 # NGTV
+
+
+# Case Log
+
+
+
 # Case Handoff 
 To:
 CFTS-Bangalore-Telco@juniper.net;CFTS-Bangalore-Routing@juniper.net
