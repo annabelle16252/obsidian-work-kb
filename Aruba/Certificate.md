@@ -29,3 +29,4 @@ QoS / roaming
 # Question
 1.need to take ACD->ACP->ACX path or direct take ACX?
 2.Any daan can refer?
+3.lab用什么模拟器？
