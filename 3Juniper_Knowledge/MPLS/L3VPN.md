@@ -19,8 +19,43 @@ bgp配 family inet-vpn unicast，就把ipv4地址变为vpn v4地址在lsp中传�
 -RT: ...为了解决要发到...peer...哪个...VRF...的问题
 -RD:...如果本端...2...个...vpn...的...3...层地址一样，都进到一个...vrf...的话，就难以区分了。所以要用...RD.
 # Secondary table #
-user@host> show route table bgp.l3vpn.0 extensive10.255.14.175:3:10.255.14.155/32 (1 entry, 0 announced)        *BGP    Preference: 170/-101                Route Distinguisher: 10.255.14.175:3                Source: 10.255.14.175                Nexthop: 192.168.192.1 via fe-1/1/2.0, selected                label-switched-path vpn07-vpn05                Push 100004, Push 100005(top)                State: <Active Int Ext>                Local AS:    69 Peer AS:    69                Age: 15:27      Metric2: 338                Task: BGP_69.10.255.14.175+179                AS path: 1 I                Communities: target:69:100                BGP next hop: 10.255.14.175                Localpref: 100                Router ID: 10.255.14.175                Secondary tables: VPN-A.inet.0 <<< this route will also be installed in this table
-user@host> show route table VPN-A.inet.0 detail10.255.14.155/32 (1 entry, 1 announced)        *BGP    Preference: 170/-101                Route Distinguisher: 10.255.14.175:3                Source: 10.255.14.175                Nexthop: 192.168.192.1 via fe-1/1/2.0, selected                label-switched-path vpn07-vpn05                Push 100004, Push 100005(top)                State: <Secondary Active Int Ext>                Local AS:    69 Peer AS:    69                Age: 1:16:22    Metric2: 338                Task: BGP_69.10.255.14.175+179                Announcement bits (2): 1-KRT 2-VPN-A-RIP                AS path: 1 I                Communities: target:69:100                BGP next hop: 10.255.14.175                Localpref: 100                Router ID: 10.255.14.175                Primary Routing Table bgp.l3vpn.0 <<< this route was imported from this table
+user@host> show route table bgp.l3vpn.0 extensive
+10.255.14.175:3:10.255.14.155/32 (1 entry, 0 announced)
+        *BGP    Preference: 170/-101
+                Route Distinguisher: 10.255.14.175:3
+                Source: 10.255.14.175
+                Nexthop: 192.168.192.1 via fe-1/1/2.0, selected
+                label-switched-path vpn07-vpn05
+                Push 100004, Push 100005(top)
+                State: <Active Int Ext>
+                Local AS:    69 Peer AS:    69
+                Age: 15:27      Metric2: 338
+                Task: BGP_69.10.255.14.175+179
+                AS path: 1 I
+                Communities: target:69:100
+                BGP next hop: 10.255.14.175
+                Localpref: 100
+                Router ID: 10.255.14.175
+                Secondary tables: VPN-A.inet.0 <<< this route will also be installed in this table
+user@host> show route table VPN-A.inet.0 detail
+10.255.14.155/32 (1 entry, 1 announced)
+        *BGP    Preference: 170/-101
+                Route Distinguisher: 10.255.14.175:3
+                Source: 10.255.14.175
+                Nexthop: 192.168.192.1 via fe-1/1/2.0, selected
+                label-switched-path vpn07-vpn05
+                Push 100004, Push 100005(top)
+                State: <Secondary Active Int Ext>
+                Local AS:    69 Peer AS:    69
+                Age: 1:16:22    Metric2: 338
+                Task: BGP_69.10.255.14.175+179
+                Announcement bits (2): 1-KRT 2-VPN-A-RIP
+                AS path: 1 I
+                Communities: target:69:100
+                BGP next hop: 10.255.14.175
+                Localpref: 100
+                Router ID: 10.255.14.175
+                Primary Routing Table bgp.l3vpn.0 <<< this route was imported from this table
 # Sham Link... #
 比如CE1-CE2，PE1从CE1收进来OSPF 10，从core里收进来的是bgp 170，所以会走backdoor ospf到达CE2.
 解决方法就是把PE1-PE2之间的link加上sham-link，这样都是ospf10，sham-link在ospf里优选。但是sham-link的nh是假的，所以nh不可达。因此ospf就不会active，这时只剩BGP了。

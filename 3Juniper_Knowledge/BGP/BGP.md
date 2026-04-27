@@ -499,9 +499,24 @@ The independent domain uses transitive path attribute 128 (attribute set) messag
 This improves the transparency of Layer 3 VPN services for customer networks by preventing the IBGP routes that originate within an autonomous system (AS) in the customer network from being sent to a service provider’s AS. Similarly, IBGP routes that originate within an AS in the service provider’s network are prevented from being sent to a customer AS.
 If the independent AS domain (It is enabled with independent-domain knob, and attribute set messages are enabled by default) is configured for the virtual routing and forwarding (VRF) instance, the global autonomous system (AS) number in the master routing instance should be prepended to the AS path when the route prefix is imported into the VRF instance. And with no-attrset configured (which disable the attribute set messages), the global AS number in the master routing instance should not be prepended to the AS path.
 PR1679646 aggregator with AS 0 under attribute-set when indipendent-domain is configured
-set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options router-id 10.65.32.1set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options autonomous-system 65503set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options autonomous-system independent-domainset routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options static route 10.65.33.0/24 discardset routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options aggregate route 10.65.32.0/19 discardset routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options maximum-prefixes 5000
+set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options router-id 10.65.32.1
+set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options autonomous-system 65503
+set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options autonomous-system independent-domain
+set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options static route 10.65.33.0/24 discard
+set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options aggregate route 10.65.32.0/19 discard
+set routing-instances HSBA_MXSVOB-s_DOWNSTREAM routing-options maximum-prefixes 5000
 > show route receive-protocol bgp 8.8.8.8 10.65.32.0/19 extensive
-bgp.l3vpn.0: 623257 destinations, 922795 routes (623257 active, 0 holddown, 0 hidden)* 8.8.8.8:10223:10.65.32.0/19 (1 entry, 1 announced)     Accepted     Route Distinguisher: 8.8.8.8:10223     VPN Label: 58     Nexthop: 8.8.8.8     Localpref: 100     AS path: I      Unrecognized Attributes: 32 bytes     Attr flags e0 code 80: 00 00 ff df 40 01 01 00 40 02 00 40 05 04 00 00 00 64 c0 07 08 00 00 00 00 00 00 00 00     Communities: target:4788:10216
+bgp.l3vpn.0: 623257 destinations, 922795 routes (623257 active, 0 holddown, 0 hidden)
+* 8.8.8.8:10223:10.65.32.0/19 (1 entry, 1 announced)
+     Accepted
+     Route Distinguisher: 8.8.8.8:10223
+     VPN Label: 58
+     Nexthop: 8.8.8.8
+     Localpref: 100
+     AS path: I 
+     Unrecognized Attributes: 32 bytes
+     Attr flags e0 code 80: 00 00 ff df 40 01 01 00 40 02 00 40 05 04 00 00 00 64 c0 07 08 00 00 00 00 00 00 00 00
+     Communities: target:4788:10216
 RFC7607
 An UPDATE message that contains the AS number of zero in the AS_PATH or AGGREGATOR attribute MUST be considered as malformed and be discarded.
 <JNCIS>

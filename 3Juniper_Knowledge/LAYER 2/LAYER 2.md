@@ -69,11 +69,38 @@ https://www.juniper.net/documentation/en_US/junos-space16.1/topics/concept/layer
 https://kb.juniper.net/InfoCenter/index?page=content&id=KB12259
 ge-0/0/1 and ge-0/0/3 are access ports.
 ge-0/04 is the trunk port.
-root# show ethernet-switching-optionsdot1q-tunneling {    ether-type 0x8100;}
-root# show vlansqinqvlan {    vlan-id 4001;    interface {        ge-0/0/1.0;        ge-0/0/3.0    }    dot1q-tunneling {        customer-vlans 1-4094;    }}
-root# show interfaces ge-0/0/4unit 0 {    family ethernet-switching {        port-mode trunk;        vlan {            members 4001;        }    }}
-root# show interfaces ge-0/0/1unit 0 {    family ethernet-switching;}
-root# show interfaces ge-0/0/3unit 0 {    family ethernet-switching;}
+root# show ethernet-switching-options
+dot1q-tunneling {
+    ether-type 0x8100;
+}
+root# show vlans
+qinqvlan {
+    vlan-id 4001;
+    interface {
+        ge-0/0/1.0;
+        ge-0/0/3.0
+    }
+    dot1q-tunneling {
+        customer-vlans 1-4094;
+    }
+}
+root# show interfaces ge-0/0/4
+unit 0 {
+    family ethernet-switching {
+        port-mode trunk;
+        vlan {
+            members 4001;
+        }
+    }
+}
+root# show interfaces ge-0/0/1
+unit 0 {
+    family ethernet-switching;
+}
+root# show interfaces ge-0/0/3
+unit 0 {
+    family ethernet-switching;
+}
 流量...c-vlan...是...100-200...的可以进来，然后...input...的话是...push...一个...s-vlan 10...，... output...是...pop...掉...s-vlan 10.
 # Native VLAN #
 [EX] Native VLAN ID and tagged behavior in EX-series switches
@@ -134,7 +161,9 @@ The backup port is a backup port for the designated port. When a designated po
 An RSTP topology contains ports that have specific roles:
 Configuring RSTP and Nonstop Bridging on Switch 1:
 If Switch 1 includes dual Routing Engines, configure NSB.
-set chassis redundancy graceful-switchoverset system commit synchronizeset protocols layer2-control nonstop-bridging <<<
+set chassis redundancy graceful-switchover
+set system commit synchronize
+set protocols layer2-control nonstop-bridging <<<
 vmm config /vmm/data/user_disks/annaw/lab/rstp/rstp.conf  -g vmm-default
 regress /MaRtInI ; root/Embe1mpls  root123
 regress@Switch-1# run show spanning-tree interface

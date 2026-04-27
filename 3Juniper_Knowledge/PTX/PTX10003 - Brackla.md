@@ -8,11 +8,15 @@ PTX10003 - Brackla
 Brackla: PTX&QFX1003
 # Command #
 Brackla AFT login:
-start shellvty fpc0
+start shell
+vty fpc0
 Brackla PFE login:
-start shellvty fpc0.0
+start shell
+vty fpc0.0
 Brackla PFE login:
-start shell user rootcd /usr/bin/cda-jspec
+start shell user root
+cd /usr/bin/
+cda-jspec
 Routing Engine 0 REV 05   750-080695   BCAG7020          RE-JNP10003-80C
 FPC 0            REV 07   750-077005   BCAG8280          FPC-JNP10003-MEZZ-C
 SIB 0                     BUILTIN      BUILTIN           SIB-JNP10003

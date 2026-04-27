@@ -32,9 +32,13 @@ SFP
 QSFP
 CFP
 Interface Range
-[edit interfaces interface-range range1]user@device# set member et-0/*/*set member et-0/[1-10]/0set member et-0/[1,2,3]/3
+[edit interfaces interface-range range1]
+user@device# set member et-0/*/*
+set member et-0/[1-10]/0
+set member et-0/[1,2,3]/3
 Channelize...：
-[edit chassis fpc 1 pic 0 port 3]user@host# set number-of-sub-ports 4
+[edit chassis fpc 1 pic 0 port 3]
+user@host# set number-of-sub-ports 4
 et-1/0/3 100 Gbps
 four sub-ports are et-1/0/3:0, et-1/0/3:1, et-1/0/3:2, and et-1/0/3:3 with 25G each
 Forward Error Correction (FEC)
@@ -44,7 +48,16 @@ Enables the receiver to correct transmission errors without requiring retransmis
 Extends the reach of optics
 cli-pfe
 root@re0:pfe> show picd config
-pic_info_table               :              default   config     config       config   computedpic_or_port   speed     pic_mode   port_speed   valid    speed      supported_speeds                                           hidden_speeds-----------   -------   --------   ----------   ------   --------   --------------------------------------------------------   -------------pic-0/0       -         -          -            yes      -port-0/0/0    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]port-0/0/1    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]port-0/0/2    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]port-0/0/3    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]...
+pic_info_table               :
+              default   config     config       config   computed
+pic_or_port   speed     pic_mode   port_speed   valid    speed      supported_speeds                                           hidden_speeds
+-----------   -------   --------   ----------   ------   --------   --------------------------------------------------------   -------------
+pic-0/0       -         -          -            yes      -
+port-0/0/0    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+port-0/0/1    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+port-0/0/2    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+port-0/0/3    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+...
 fpc0:pfe> show picd channel summary
 0/0/2:0  100G  Chan_Online  Tune_Ok    up   up   up   up    1    8
 channel-0/0/3:0  100G  Chan_Online  Tune_Ok    up   up   up   up    1    12
@@ -102,11 +115,19 @@ Hex:16  / Decimal...：...10 / Oct...：...8
 star shell pfe network fpcx
 show sfp list
 show sfp X info <<<<< X -index from previous output, the check the read errors
-show chassis pic fpc-slot <> pic-slot <>'. <<< 这个命令能看出sfp vendor 名字PIC port information:                                    Fiber                               Xcvr vendor       Wave-                     Xcvr              JNPR     MSAPort Cable type        type  Xcvr vendor        part number       length                    Firmware      Rev      Version0    GIGE 100FX PHY    MM    EOPTOLINK INC      EOLS13032MDMGJ4   1310 nm                   0.0           REV 01   SFF-8472 ver 11.3
+show chassis pic fpc-slot <> pic-slot <>'. <<< 这个命令能看出sfp vendor 名字
+PIC port information:
+                                    Fiber                               Xcvr vendor       Wave-                     Xcvr              JNPR     MSA
+Port Cable type        type  Xcvr vendor        part number       length                    Firmware      Rev      Version
+0    GIGE 100FX PHY    MM    EOPTOLINK INC      EOLS13032MDMGJ4   1310 nm                   0.0           REV 01   SFF-8472 ver 11.3
 Interface Range
-[edit interfaces interface-range range1]user@device# set member et-0/*/*set member et-0/[1-10]/0set member et-0/[1,2,3]/3
+[edit interfaces interface-range range1]
+user@device# set member et-0/*/*
+set member et-0/[1-10]/0
+set member et-0/[1,2,3]/3
 Channelize...：
-[edit chassis fpc 1 pic 0 port 3]user@host# set number-of-sub-ports 4
+[edit chassis fpc 1 pic 0 port 3]
+user@host# set number-of-sub-ports 4
 et-1/0/3 100 Gbps
 four sub-ports are et-1/0/3:0, et-1/0/3:1, et-1/0/3:2, and et-1/0/3:3 with 25G each
 Forward Error Correction (FEC)
@@ -116,7 +137,16 @@ Enables the receiver to correct transmission errors without requiring retransmis
 Extends the reach of optics
 cli-pfe
 root@re0:pfe> show picd config
-pic_info_table               :              default   config     config       config   computedpic_or_port   speed     pic_mode   port_speed   valid    speed      supported_speeds                                           hidden_speeds-----------   -------   --------   ----------   ------   --------   --------------------------------------------------------   -------------pic-0/0       -         -          -            yes      -port-0/0/0    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]port-0/0/1    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]port-0/0/2    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]port-0/0/3    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]...
+pic_info_table               :
+              default   config     config       config   computed
+pic_or_port   speed     pic_mode   port_speed   valid    speed      supported_speeds                                           hidden_speeds
+-----------   -------   --------   ----------   ------   --------   --------------------------------------------------------   -------------
+pic-0/0       -         -          -            yes      -
+port-0/0/0    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+port-0/0/1    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+port-0/0/2    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+port-0/0/3    1x400G    -          1x100G       -        1x100G     [ 1x400G 1x200G 4x10G 1x40G 4x25G 1x100G 4x100G 2x200G ]   [ ]
+...
 fpc0:pfe> show picd channel summary
 0/0/2:0  100G  Chan_Online  Tune_Ok    up   up   up   up    1    8
 channel-0/0/3:0  100G  Chan_Online  Tune_Ok    up   up   up   up    1    12
