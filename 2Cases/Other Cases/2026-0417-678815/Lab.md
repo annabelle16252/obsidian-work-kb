@@ -16,7 +16,8 @@ tcpdump -i ae22 -w /var/tmp/test-ae22.log
 set class-of-service host-outbound-traffic protocol apply-groups
 https://www.juniper.net/documentation/us/en/software/junos/cos/topics/concept/cos-assigning-fc-dscp-to-re-pkts.html
 
-
+Assigning Forwarding Class and DSCP Value for Routing Engine-Generated Traffic
+https://www.juniper.net/documentation/us/en/software/junos/cos/topics/concept/cos-assigning-fc-dscp-to-re-pkts.html
 # BGP Packet
 r1 -- r2 的 BGP keepalive/update 路径是：
 发送侧 r1：rpd 生成 BGP 报文，经本机转发面从接口发出，走egress q0
