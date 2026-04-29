@@ -2,6 +2,7 @@
 ptx10008+lc1301 <<< NGTV4
 # Chassis
 ![[Pasted image 20260420110203.png]]
+![[Pasted image 20260429095606.png]]
 # Commands #
 FPC AFT login:
 start shell pfe network fpc0

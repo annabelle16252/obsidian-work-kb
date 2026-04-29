@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1Tools/AI Tools/Obsidian.md",
+                "file": "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Obsidian"
+              "title": "PTX10008 - Scapa"
             }
           }
         ]
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1Tools/AI Tools/Obsidian.md",
+                "file": "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Obsidian"
+              "title": "Outline of PTX10008 - Scapa"
             }
           }
         ],
@@ -184,6 +184,8 @@
   },
   "active": "a0d8bd79c95afb99",
   "lastOpenFiles": [
+    "attachments/Pasted image 20260429095606.png",
+    "1Tools/AI Tools/Obsidian.md",
     "1Tools/AI Tools/Github Copilot.md",
     "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
     "attachments/Pasted image 20260429093431.png",
@@ -214,8 +216,6 @@
     "3Juniper_Knowledge/QFX/QFX-EVO Debugging session.md",
     "3Juniper_Knowledge/QFX/ACX7K.md",
     "3Juniper_Knowledge/Network/Layer 4.md",
-    "3Juniper_Knowledge/Network/MVPN.md",
-    "3Juniper_Knowledge/Network/Snmp trapd.md",
     "Daily",
     "Company",
     "Tools/JTAC Tools",
