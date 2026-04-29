@@ -1,18 +1,9 @@
 # Sync_to_Github
 ```
-频率：每天 1-2 次（比如下班前） 或 每周一次定期备份
-'/Users/annaw/Documents/Obsidian Vault'
+GitHub remote（annabelle16252/obsidian-work-kb）自动push
+如果你临时想手动备份一次，终端输入 obbackup 就行。
 
-快捷方式： terminal run
-% obsync
-脚本位置：
-~/.local/bin/obsync
-
-快捷方式包含的命令:
-cd "/Users/annaw/Documents/Obsidian Vault"
-git add -A
-git commit -m "Obsidian backup: $(date +'%Y-%m-%d %H:%M')"
-git push origin main
+git 本地在 ~/ObsidianBackup/
 
 ```
 

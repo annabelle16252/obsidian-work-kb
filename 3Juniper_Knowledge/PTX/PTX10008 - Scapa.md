@@ -96,10 +96,6 @@ LU chip（查表） + MQ chip（队列管理）+ XL chip（fabric）
 # Port Group
 800Gbps per PG，total 18 PG instances on BX
 ![[Pasted image 20260421130246.png]]
-
-
-
-
 # RETIMER 
 BXF 这个例子里
 BX die 和 BF die = 两颗独立制造的裸硅片
@@ -112,7 +108,79 @@ MCM 是一种封装技术：把多颗独立的裸 die（芯片）放在同一个
 ![[Pasted image 20260421121238.png]]
 BX 芯片 Fabric 侧用的是 XSR SERDES（省电 70%），但 XSR 只能走短距离（MCM 内部），无法直接驱动背板上的长距离 trace。
 解决方案：把一颗 BF die 和 BX die 封装在同一个 MCM 里。BF 在这里不做交换，只做 XSR→LR 的信号转换（retimer 角色）。封装里同时有 HBM 贴在 BX die 旁边。
+# VOQ
+VOQ 可以理解为“按目的出口拆分的虚拟队列”。它不是单纯一个 FIFO，而是很多个逻辑队列。
+在 BX 里，每个 7.2T datapath 有一个 VOQ Manager，维护 48K 个 VOQ。
+Ingress 处理完包头后，会得到转发结果（包括 VOQ 编号），然后把包写入 CBUF，并把包描述符入对应 VOQ。
+CM（Congestion Manager）按 VOQ 做拥塞判断、丢弃/标记决策，并统计每个 VOQ 占用。
+VOQ 调度是 fabric 的 request/grant 调度核心；你在 day1/day3 字幕里提到的“VOQ scheduling across fabric”就是这个。
+当某个 VOQ 拥塞时，才会把对应流量页下沉到外部 HBM（off-chip DBB），不是所有包都下沉。
 
+VOQM 管的是 descriptor/page，不是 payload 本体。
+
+ingress fabric interface包含：
+VOQ Manager：维护和选择待发队列状态
+Request Scheduler：做 request/grant 仲裁，决定谁先发
+Fabric Out：把获批流量真正送到 fabric 链路
+
+![[Pasted image 20260428141152.png]]
+1.
+IG x9 + IG_MISC -> enq pkt_descr x10
+来自 ingress group 的入队请求。
+不是整包数据进 VOQM，而是“包描述符”进 VOQM（真正包数据在 CBUF/HBM）。
+2.
+CM <-> enq/deq updts
+CM（Congestion Manager）和 VOQM 交换队列占用变化。
+VOQM 入队/出队会更新拥塞状态，CM 再用于丢弃/标记/阈值控制。
+3.
+RS enq / RS deq
+RS（Request Scheduler）和 VOQM 的队列级交互。
+可以理解为：RS 负责调度，VOQM 提供“谁有包、该出谁”的队列状态与出队执行。
+4.
+FI (xN) -> fabric Gnt
+来自 Fabric In 的 grant（授权）反馈。
+VOQM 拿到 grant 后，才会把对应 page descriptor 发给后续发送通路。
+右侧输出到存储与发送路径
+5.
+Wr-page descr -> MemOut(x2)，Ack 回来
+当队列判定要下沉到外部 DBB（HBM）时，VOQM 发写页描述符给 MemOut。
+MemOut 处理后回 Ack。
+6.
+Rd-page descr -> MemIn(x2)，Ack 回来
+出队时如果数据在外部 HBM，VOQM 发读页描述符给 MemIn，把页搬回 CBUF/发送链路。
+完成后回 Ack。
+7.
+fabric Req 和 page_descr -> FO
+VOQM 向 FO（Fabric Out）发 fabric 请求和对应页描述符，驱动真正上 fabric 发包。
+8.
+LS Req / LS Gnt / LS page descr <-> VIQM(x2)
+这是本地交换（Local Switch）路径的请求/授权/描述符交互。
+不走远端 fabric 的流量可在本地路径完成。
+一句话理解这张图
+VOQ Manager 是“队列状态中枢 + 描述符调度中枢”：
+左边收 ingress 入队和调度/拥塞反馈，右边按 grant 决定是走 fabric 发送、走 local-switch，还是和外部 HBM 做页级 spill/fill。
+
+# VIQ
+Egress Fabric Interface: DATA Flow
+![[Pasted image 20260429091155.png]]
+![[Pasted image 20260429093431.png]]
+OQ就是给port group interfaces的queue在BX/BXF上进行缓存的。
+
+
+# DBB
+Datapath Buffering, 是 BX 的“深缓冲”机制，用片上+片外协同，专门扛拥塞和突发。
+它分两层：
+片上 Internal DBB（在 ==CBUF== 里，低时延）
+片外 External DBB（==HBM==，大容量但带宽超分）
+正常先走片上缓冲；只有队列拥塞时，才把流量页下沉到片外 HBM。
+这个 on-chip/off-chip 的选择是在 enqueue 时由 CM/VOQ 相关逻辑决定的。
+
+# CBF
+Central memory Subsystem
+![[Pasted image 20260428134541.png]]
+
+# HBM
+![[Pasted image 20260428140216.png]]
 
 # SIB 
 SF5 -BF chipset
@@ -133,7 +201,15 @@ https://junipernetworks.sharepoint.com/:p:/r/teams/RBU/test/RBU-SP/_layouts/15/D
 
 PTX10008 LC1301 Knowledge Hub
 https://junipernetworks.sharepoint.com/sites/gs-knowledge-hub/NPI/Forms/AllItems.aspx?FolderCTID=0x012000A84CDFE1A930FB449DB698E0B039C7F7&id=%2Fsites%2Fgs%2Dknowledge%2Dhub%2FNPI%2FPTX10008%2DLC1301%2D36DD%28Aegon%29
-
+Day1（PLM & ASIC）
+偏架构总览：平台定位、ASIC/芯片模块、fabric 与 buffer 体系。
+明确提到 Port Group（18 个 PG、每个 800G）和 clock gating 的功耗思路。
+Day2（HW, SW, Test）
+偏硬件实现与 bring-up：板级连接、fabric links、lane/retimer、电源与热设计、测试讨论。
+lane/fabric/power 相关讨论密度很高。
+Day3（SW Contd）
+偏软件与转发流水：ingress/egress 处理、VLAN 操作、端口到 ASIC datapath/PG 的映射。
+有比较多 datapath 与 egress pipeline 的实操解释。
 
 LC1201 & LC1202 overview
 [https://junipernetworks.sharepoint.com/:p:/r/sites/VerizonCFTS-USTeam/_layouts/15/Doc.aspx?sourcedoc=%7BF1131071-C31A-470C-9CD3-317672EB3133%7D&file=LC1201%20LC1202%20overview1_678186508.pptx&action=edit&mobileredirect=true&DefaultItemOpen=1](https://junipernetworks.sharepoint.com/:p:/r/teams/RBU/software/PFE/trio_pfe/projects/aft/_layouts/15/Doc.aspx?sourcedoc=%7B7AD87734-49AC-4D64-B910-8BE9A11AE1D9%7D&file=LC1201%20OVERVIEW.pptx&action=edit&mobileredirect=true&DefaultItemOpen=1)

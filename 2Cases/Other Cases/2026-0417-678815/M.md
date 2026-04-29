@@ -37,6 +37,33 @@ xe-10/0/2
 
 
 
+-----------
+
+Hi Naveen,
+ 
+With the host-outbound-traffic configuration below, which other protocols, apart from BGP control packets, will be directed to queue 3?
+ 
+cheeloong.tong@lab-MX960-3d-04-P3-re0> show configuration class-of-service host-outbound-traffic
+Apr 28 11:05:30
+forwarding-class nc_premiumnrt;
+dscp-code-point cs6;.
+
+-----------------
+
+
+Hi Naveen,
+ 
+I have changed the line card from MPC3E-3D-NG to MPC2E-3D-NG-Q ge-3/0/0 and still observed BGP flapping but with very few occurrence.
+ 
+It flapped 3 times from yesterday 3pm till now.
+ 
+Do you observe any BGP flapping when testing with non-MPC3E-3D-NG line card?
+ 
+Also, are there any complications using the host-outbound-traffic knob?
+
+
+-----------------
+
 
 Dear Tong,
 

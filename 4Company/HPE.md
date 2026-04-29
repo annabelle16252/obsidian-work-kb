@@ -31,6 +31,11 @@ Annabelle Wang - Qscft.0818aaa
 パスワード：19800829
 https://www.health-plus.mrso.jp/tops
 
+# citi credit
+username: annawwang
+1,600,000.00 JPY
+https://home.cards.citidirect.com/CommercialCard/ch/home
+
 住所
  〒141-0032　東京都品川区大崎1-6-1TOC大崎ﾋﾞﾙ 1F
 アクセス

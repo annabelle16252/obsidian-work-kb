@@ -1,6 +1,12 @@
 2026-0427-691570 - 20577 - SINGTEL -- IX - NERA -[Singtel:Singtel-IX:xn-sineq4-bo301] Checking for OpenSSH 10.3 CVE-2026-35385 for 23.2R2-S2.5| Ticket #20577
 
-ext-singtel-cs@juniper.net;gso-advancedandpremiumcare@juniper.net;cfts-apac-singtel@juniper.net;sm-sp.psm.sg@nera.net;support@juniper.net;ext-Singtel-cs@groups.ext.hpe.com
+
+
+Dear Tong,
+
+We have checked internally on this and found Junos version 23.2R2-S2.5 is not affected by the vulnerability CVE-2026-35385.
+
+------------
 
 Dear Tong,
 

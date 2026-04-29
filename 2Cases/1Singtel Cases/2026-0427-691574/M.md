@@ -1,6 +1,16 @@
 
  2026-0427-691574 - 20577 - SINGTEL -- IX - NERA -[Singtel:Singtel-IX:xn-sineq4-bo301] Checking for OpenSSH 10.3 CVE-2026-35387 for 23.2R2-S2.5| Ticket #20577
 
+
+
+Dear Tong,
+
+We have checked internally on this and found Junos version 23.2R2-S2.5 is not affected by the vulnerability CVE-2026-35387.
+
+
+
+------------
+
 # Case
 Hi CFTS,
 

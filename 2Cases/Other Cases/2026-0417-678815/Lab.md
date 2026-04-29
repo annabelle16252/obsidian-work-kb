@@ -12,7 +12,9 @@ tcpdump -i ae22 -w /var/tmp/test-ae22.log
 
 
 
-
+# host-bound traffic
+set class-of-service host-outbound-traffic protocol apply-groups
+https://www.juniper.net/documentation/us/en/software/junos/cos/topics/concept/cos-assigning-fc-dscp-to-re-pkts.html
 
 
 # BGP Packet
