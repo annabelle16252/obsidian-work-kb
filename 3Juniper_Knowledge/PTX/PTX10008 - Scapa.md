@@ -17,6 +17,13 @@ chvrf iri ssh fpc0
 "Aegon – LC1301" - Express5 BX
 "Scapa - LC1201" - Scapa BT
 
+![[Pasted image 20260429101548.png]]
+Main board = 线卡主板，承载高速数据面器件与主互连
+Mezzanine board = 插在主板上的子板形态，用于扩展特定功能
+PMB = 控制面子板（线卡控制“大脑”），其上是 AMD Snowy Owl 8-core CPU + 64GB DDR4（2x32GB）。PMB 负责控制管理，数据面高速转发由 BXF/BF ASIC 完成。
+
+
+
 PTX10K-LC1301-36DD	PTX10K 28.8T Line-card, 36x800G/72x400G/288x100G QSFP-DD
 
 LC1301 is BXF based =BX+BF, the BF chipset is used to connect with Fabric -BF chip
@@ -182,9 +189,14 @@ Central memory Subsystem
 
 # HBM
 ![[Pasted image 20260428140216.png]]
-
 # SIB 
-SF5 -BF chipset
+6 X SIB8 (JNP10008-SF5), BF ASIC
+![[Pasted image 20260429103702.png]]
+
+23:23
+
+
+
 # PWR
 3 power supplies can be sufficient for powering the system. However all the 6 power supplies are requested to be physically inserted into the chassis even though some of them are not connected to power source. 
 1. Electrical load may need only 3 PSUs. This is about watts for RE/FPC/SIB.
