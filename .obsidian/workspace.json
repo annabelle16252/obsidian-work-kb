@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
+                "file": "2Cases/Other Cases/2026-0417-678815/Lab.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PTX10008 - Scapa"
+              "title": "Lab"
             }
           }
         ]
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
+                "file": "2Cases/Other Cases/2026-0417-678815/Lab.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PTX10008 - Scapa"
+              "title": "Outline of Lab"
             }
           }
         ],
@@ -184,17 +184,17 @@
   },
   "active": "a0d8bd79c95afb99",
   "lastOpenFiles": [
+    "2Cases/Other Cases/2026-0417-678815/Escalation.md",
+    "2Cases/Other Cases/2026-0417-678815/Lab.md",
+    "2Cases/Other Cases/2026-0417-678815/M.md",
+    "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
     "attachments/Pasted image 20260429103702.png",
     "attachments/Pasted image 20260429101548.png",
     "attachments/Pasted image 20260429095606.png",
     "1Tools/AI Tools/Obsidian.md",
     "1Tools/AI Tools/Github Copilot.md",
-    "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
     "attachments/Pasted image 20260429093431.png",
     "attachments/Pasted image 20260429091155.png",
-    "2Cases/Other Cases/2026-0417-678815/Lab.md",
-    "2Cases/Other Cases/2026-0417-678815/Escalation.md",
-    "2Cases/Other Cases/2026-0417-678815/M.md",
     "4Company/HPE.md",
     "attachments/Pasted image 20260428141152.png",
     "attachments/Pasted image 20260428140216.png",
@@ -228,7 +228,6 @@
     "Singtel Cases/2026-0309-626289",
     "Singtel Cases/2026-0309-626085",
     "Singtel Cases/2026-0122-049996",
-    "attachments/Pasted image 20260418121209.png",
-    "Pasted image 20260406124715.png"
+    "attachments/Pasted image 20260418121209.png"
   ]
 }
