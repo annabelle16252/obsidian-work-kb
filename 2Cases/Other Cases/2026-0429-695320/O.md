@@ -207,15 +207,38 @@ ge-3/1/6 最先恢复（12:56-13:00 SGT），方式是 config 修改（不是 SF
 ge-3/0/1 ge-3/1/4《〈《 没做过re-initiate
 
 
+SFP-FX-PHY (光模块，740-021487)
+    ↓ 光信号
+VSC8584 PHY chip (物理层芯片，做信号转换 + auto-negotiation，on MIC)
+    ↓ 数字信号
+MAC layer (mic_gi2 驱动，MPC2E NG 上的以太网控制器)
+    ↓
+PFE 转发引擎
 
+
+I suspect VSC8584 PHY data forwarding path already stopped, but for some reason link state was not updated to DOWN.
+<<<
+SFP-FX-PHY 
+    ↓ optical signal
+VSC8584 PHY chip (on MIC)
+    ↓ digital signal
+MAC layer (mic_gi2 driver on MPC)
+    ↓
+PFE ( packet forwarding)
+<<<
+
+Around Apr 28 15:42, the first time FPC3 MIC  reported  MAC layer is issuing a link I/O control operation (ioctl) to the VSC8584 PHY chip which may accidentally started the issue:
+<<<
 Apr 28 15:42:20 fpc3 mic_gi2_mac_lnk_ioctl: ge lnk ioctl 21
 Apr 28 15:42:20 fpc3 mic_gi2_mac_lnk_ioctl: ge lnk ioctl 21
 Apr 28 15:42:20 lfmd[16811]: LFMD_3AH_LINKDOWN: (ge-3/1/6): 802.3ah link-fault status changed to fault with reason [Adjacency lost]
+<<<
 
-fpc3 ioctl total:  156 (starts Apr 28 15:42:20 — never before)
-fpc0 ioctl total:  225,238 (starts Apr 28 00:00:01 — pre-existing)
-fpc1 ioctl total:  227,763 (starts Apr 28 00:00:01 — pre-existing)
-
+Apr 28 15:15:21 fpc3   vsc8584 PMA/PMD reg for this ifd reads 1c9
+  ... (repeated across all PHY LINK down events)
+Apr 28 23:46:09 MX-BP-02-06 fpc3 gi2mic_vsc8584_link_status_get: PHY LINK down detected for ifd ge-3/0/3
+Apr 28 23:46:09 MX-BP-02-06 fpc3   vsc8584 PMA/PMD reg for this ifd reads 1c9
+https://opengrok.juniper.net/source/xref/RELEASE_232_THROTTLE/pfe/common/drivers/mic/gi2mic_platform.c?r=1316144&mo=30987&fi=1060#1060
 
 Attempt 1 — 12:56-13:00: Config modification on ge-3/1/6 → FAILED
 ge-3/1/6: disable → delete OAM/speed/link-mode → re-enable → reconfigure speed 100m + full-duplex. Interface came up but traffic not restored
