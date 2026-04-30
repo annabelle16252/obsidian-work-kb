@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2Cases/Other Cases/2026-0417-678815/Lab.md",
+                "file": "5Daily/NISA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lab"
+              "title": "NISA"
             }
           }
         ]
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2Cases/Other Cases/2026-0417-678815/Lab.md",
+                "file": "5Daily/NISA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Lab"
+              "title": "Outline of NISA"
             }
           }
         ],
@@ -184,8 +184,8 @@
   },
   "active": "a0d8bd79c95afb99",
   "lastOpenFiles": [
-    "2Cases/Other Cases/2026-0417-678815/Escalation.md",
     "2Cases/Other Cases/2026-0417-678815/Lab.md",
+    "2Cases/Other Cases/2026-0417-678815/Escalation.md",
     "2Cases/Other Cases/2026-0417-678815/M.md",
     "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
     "attachments/Pasted image 20260429103702.png",
