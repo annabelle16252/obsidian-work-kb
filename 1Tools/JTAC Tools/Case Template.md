@@ -13,6 +13,7 @@ I will go through the case and provide you and update later.
 /volume/case_2026/
 /volume/CSdata/annaw/case/
 
+ssh annaw@p-jtac-lnx02.juniper.net
 rsi-varlog /volume/CSdata/annaw/case/
 --rsi-file 指定rsi file
 --var-log-dir 指定解压文件
