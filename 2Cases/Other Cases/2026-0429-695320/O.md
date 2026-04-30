@@ -163,7 +163,7 @@ ge-3/1/9.16386          up    down
 
 please help to check rca.
 # Issue
-service impact at the following interfaces at approximately 1230PM 29 April SGT. (ge-3/0/1, ge-3/0/3, ge-3/0/4,ge-3/1/4,ge-3/1/6,ge-3/1/7).
+service impact at the following interfaces at approximately 1230PM 29 April SGT. (ge-3/0/1, ge-3/0/3, ge-3/0/4,ge-3/1/4,ge-3/1/6,ge-3/1/7). all ports traffic came down at 15:45
 Base on traffic monitoring graph, no traffic since ==4pm 28 April ==SGT (Graph uploaded to JSP)
 interface UP, but no traffic
 
@@ -194,5 +194,54 @@ FPC 3            REV 36   750-063184   EBBM8184          MPC2E NG PQ & Flex Q
       ==Xcvr 7     REV 01   740-021487   SQBW060111        SFP-FX-PHY==
 
 
+Apr 29 15:37:37 MX-BP-02-06 mgd[48601]: UI_CMDLINE_READ_LINE: User 'P1256869_RW', command 'request chassis mic offline fpc-slot 3 mic-slot 0 '
 
+ge-3/1/6 最先恢复（12:56-13:00 SGT），方式是 config 修改（不是 SFP reinitialize）
+所有其他接口的 SFP reinitialize 都在之后：
+第一轮（13:52-13:56）：只做了 ge-3/1/7、ge-3/1/6、ge-3/0/4 三个口 → 未恢复 traffic
+中间做了 MIC offline/online
+第二轮（15:51-16:29）：做了 ge-3/0/0、ge-3/0/3、ge-3/0/4、ge-3/1/6、ge-3/1/0、ge-3/0/7、ge-3/0/8、ge-3/1/3、ge-3/1/2、ge-3/0/2 → 这轮恢复了 traffic
+
+(ge-3/0/1, ge-3/0/3, ge-3/0/4,ge-3/1/4,ge-3/1/6,ge-3/1/7).
+
+ge-3/0/1 ge-3/1/4《〈《 没做过re-initiate
+
+
+
+Apr 28 15:42:20 fpc3 mic_gi2_mac_lnk_ioctl: ge lnk ioctl 21
+Apr 28 15:42:20 fpc3 mic_gi2_mac_lnk_ioctl: ge lnk ioctl 21
+Apr 28 15:42:20 lfmd[16811]: LFMD_3AH_LINKDOWN: (ge-3/1/6): 802.3ah link-fault status changed to fault with reason [Adjacency lost]
+
+fpc3 ioctl total:  156 (starts Apr 28 15:42:20 — never before)
+fpc0 ioctl total:  225,238 (starts Apr 28 00:00:01 — pre-existing)
+fpc1 ioctl total:  227,763 (starts Apr 28 00:00:01 — pre-existing)
+
+
+Attempt 1 — 12:56-13:00: Config modification on ge-3/1/6 → FAILED
+ge-3/1/6: disable → delete OAM/speed/link-mode → re-enable → reconfigure speed 100m + full-duplex. Interface came up but traffic not restored
+
+Attempt 2 — 13:52-13:56: First round SFP reinitialize → FAILED
+sfp 54 (ge-3/1/7) — reinitialized ×2
+sfp 53 (ge-3/1/6) — reinitialized ×2
+sfp 41 (ge-3/0/4) — reinitialized ×1
+Traffic not restored on any interface
+
+Attempt 3 — 15:37: MIC 0 offline/online → FAILED
+All interfaces on MIC 0 and MIC 1 detached/destroyed and recreated
+Interfaces came back up but still flapping, traffic not restored
+
+Attempt 4 — 15:51-16:29: Second round SFP reinitialize → TRAFFIC RESTORED
+sfp 37 (ge-3/0/0) — reinitialized ×1
+sfp 40 (ge-3/0/3) — reinitialized ×2
+sfp 41 (ge-3/0/4) — reinitialized ×1
+sfp 53 (ge-3/1/6) — reinitialized ×2 (still flapping, required config modification again at 16:17-16:21)
+sfp 47 (ge-3/1/0) — reinitialized ×1
+sfp 44 (ge-3/0/7) — reinitialized ×1
+sfp 45 (ge-3/0/8) — reinitialized ×1
+sfp 50 (ge-3/1/3) — reinitialized ×2
+sfp 49 (ge-3/1/2) — reinitialized ×1
+sfp 39 (ge-3/0/2) — reinitialized ×1
+All traffic recovered after this round.
+
+ge-3/0/1 and ge-3/1/4 which has traffic stop issue were never reinitialized in any round.
 
