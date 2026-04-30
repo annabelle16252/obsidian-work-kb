@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2Cases/Other Cases/2026-0429-695320/O.md",
+                "file": "5Daily/NISA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "O"
+              "title": "NISA"
             }
           }
         ]
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2Cases/Other Cases/2026-0429-695320/O.md",
+                "file": "5Daily/NISA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of O"
+              "title": "Outline of NISA"
             }
           }
         ],
@@ -182,10 +182,16 @@
       "custom-sort:Toggle custom sorting": false
     }
   },
-  "active": "a0d8bd79c95afb99",
+  "active": "b5b045345513cf77",
   "lastOpenFiles": [
-    "2Cases/Other Cases/2026-0429-695320/M.md",
+    "5Daily/temp.md",
+    "2Cases/1Singtel Cases/Singtel Process/Meetings.md",
+    "1Tools/AI Tools/Skill/GNATS protocol.md",
+    "2Cases/Other Cases/2026-0417-678815/Escalation.md",
+    "attachments/Pasted image 20260430141430.png",
+    "attachments/Pasted image 20260430141412.png",
     "2Cases/Other Cases/2026-0429-695320/O.md",
+    "2Cases/Other Cases/2026-0429-695320/M.md",
     "1Tools/JTAC Tools/Case Template.md",
     "1Tools/AI Tools/rsi-varlog-explorer.md",
     "1Tools/AI Tools/rsi-explorer-JTAC.md",
@@ -193,7 +199,6 @@
     "5Daily/NISA.md",
     "2Cases/Other Cases/2026-0429-695320",
     "2Cases/Other Cases/2026-0417-678815/Lab.md",
-    "2Cases/Other Cases/2026-0417-678815/Escalation.md",
     "2Cases/Other Cases/2026-0417-678815/M.md",
     "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
     "attachments/Pasted image 20260429103702.png",
@@ -207,19 +212,15 @@
     "attachments/Pasted image 20260428141152.png",
     "attachments/Pasted image 20260428140216.png",
     "attachments/Pasted image 20260428134541.png",
-    "attachments/Pasted image 20260428134413.png",
     "5Daily/A.md",
     "5Daily/To_Do.md",
     "3Juniper_Knowledge/COS/A.md",
     "3Juniper_Knowledge/PTX/PTX10016 - Scapa.md",
     "3Juniper_Knowledge/PTX/PTX10003 - Brackla.md",
-    "5Daily/temp.md",
     "4Company/Organization.md",
     "4Company/PC.md",
     "4Company/Reimburse.md",
     "2Cases/1Singtel Cases/2026-0427-691574/M.md",
-    "2Cases/1Singtel Cases/2026-0427-691570/M.md",
-    "1Tools/JTAC Tools/Coredump.md",
     "Daily",
     "Company",
     "Tools/JTAC Tools",
@@ -228,7 +229,6 @@
     "Singtel Cases/2026-0413-672364",
     "Singtel Cases/2026-0318-643131",
     "Singtel Cases/2026-0309-626289",
-    "Singtel Cases/2026-0309-626085",
-    "attachments/Pasted image 20260418121209.png"
+    "Singtel Cases/2026-0309-626085"
   ]
 }

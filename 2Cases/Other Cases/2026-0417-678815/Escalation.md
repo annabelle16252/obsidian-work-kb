@@ -2,64 +2,91 @@
 
 
 
-```
-Without flex knob:
-NGMPC1(jtac-mx960-r2038-re0 vty)# show cos halp ifd  305
 
---------------------------------------------------------------------------------
-    rich queueing enabled: 0
-    Q chip present: 0
-IFD name: ge-1/2/0   (Index 305) egress information
-    XM chip id: 0
-    XM : chip Scheduler: 0
-    XM chip L1 index: 64
-    XM chip dummy L2 index: 128
-    XM chip base Q index: 512
-    Number of queues: 8
-    Rich queuing support: 0 (ifl queued:0)
---------------------------------------------------------------------------------------------
-Queue  State        Max           Guaranteed    Burst       Weight  G-Pri  E-Pri  WRED  TAIL
-Index               Rate          Rate          Size                              Rule  Rule
---------------------------------------------------------------------------------------------
-512    Configured   1000000000    950000000     131064      118     GL     EL     4     89  
-513    Configured   1000000000    0             131064      1       GL     EL     0     1   
-514    Configured   1000000000    0             131064      1       GL     EL     0     1   
-515    Configured   1000000000    50000000      131064      6       GL     EL     4     24  
-516    Configured   1000000000    0             131064      1       GL     EL     0     1   
-517    Configured   1000000000    0             131064      1       GL     EL     0     1   
-518    Configured   1000000000    0             131064      1       GL     EL     0     1   
-519    Configured   1000000000    0             131064      1       GL     EL     0     1   
-----------------------------------------------------------------------------------
 
-With flex knob:
 
-NGMPC1(jtac-mx960-r2038-re0 vty)# show cos halp ifd 305
+Naveen,
+I see host-output BGP packets are sent to Q3 now.
+I believe ARP packets might be still being dropped as they are going to Q0 by default.
 
---------------------------------------------------------------------------------
-    rich queueing enabled: 1
-    Q chip present: 1
-IFD name: ge-1/2/0   (Index 305) egress information
-    XQ chip id: 0
-    XQ : chip Scheduler: 0
-    XQ chip L1 index: 0
-    XQ chip dummy L2 index: 0
-    XQ chip dummy L3 index: 0
-    XQ chip dummy L4 index: 1
-    Number of queues: 8
-    XQ chip base Q index: 8
-Queue    State        Max       Guaranteed   Burst  Weight Priorities Drop-Rules  Scaling-profile 
-Index                 rate         rate      size            G    E   Wred  Tail       ID
------- ----------- ----------- ------------ ------- ------ ---------- ----------  ----------------
-     8  Configured  1000000000    950000000 16777216     95   GL    EL    4   397        3
-     9  Configured  1000000000            0 16777216      1   GL    EL    0    72        3
-    10  Configured  1000000000            0 16777216      1   GL    EL    0    72        3
-    11  Configured  1000000000     50000000 16777216      5   GL    EL    4   211        3
-    12  Configured  1000000000            0 16777216      1   GL    EL    0    72        3
-    13  Configured  1000000000            0 16777216      1   GL    EL    0    72        3
-    14  Configured  1000000000            0 16777216      1   GL    EL    0    72        3
-    15  Configured  1000000000            0 16777216      1   GL    EL    0    72        3
+You may want to try with these hidden knobs.
+set system arp arp-request-bump-priority
+set system arp arp-reply-bump-priority
 
-```
+Thx,
+-Naotaka
+
+--------------
+
+Hi Naotaka,
+
+We checked in JTAC lab by configuring firewall filter to filter RE host-bound traffic and mapping to Q3 on the lo0 interface.
+We have deactivated host-bound traffic on the routers. 
+
+When sending 2 G traffic (making congestion) below are the observations-
+On setup 1 with logical instance on same router- BGP session is flapping frequently every once in an hour. 
+
+
+
+Apr 30 03:58:14.434  jtac-mx960-r2038-re0 rpd[22371]: bgp_handle_notify:5227: NOTIFICATION received from 192.168.1.2 (External AS 65020): code 4 (Hold Timer Expired Error), socket buffer sndacc: 57 rcvacc: 0 , socket buffer sndccc: 57 rcvccc: 0 TCP state: 5, snd_una: 1903718790 snd_nxt: 1903718847 snd_wnd: 17376 rcv_nxt: 2404280900 rcv_adv: 2404297263, hold timer 90s, hold timer remain 0s, last sent 8s, TCP port (local 179, remote 62416)
+Apr 30 04:19:53.078  jtac-mx960-r2038-re0 rpd[22371]: BGP_IO_ERROR_CLOSE_SESSION: BGP peer 192.168.1.2 (External AS 65020): Error event Operation timed out(60) for I/O session - closing it (instance master)
+Apr 30 04:19:53.083  jtac-mx960-r2038-re0 rpd[22371]: bgp_io_mgmt_cb:3103: NOTIFICATION sent to 192.168.1.2 (External AS 65020): code 4 (Hold Timer Expired Error), Reason: holdtime expired for 192.168.1.2 (External AS 65020), socket buffer sndacc: 57 rcvacc: 0 , socket buffer sndccc: 57 rcvccc: 0 TCP state: 4, snd_una: 491733740 snd_nxt: 491733797 snd_wnd: 16384 rcv_nxt: 2483003772 rcv_adv: 2483021148, hold timer 90s, hold timer remain 0s, last sent 21s, TCP port (local 51171, remote 179)
+Apr 30 04:24:36.210  jtac-mx960-r2038-re0 rpd[22371]: bgp_recv: read from peer 192.168.1.2 (External AS 65020) failed: Connection reset by peer
+Apr 30 05:07:50.665  jtac-mx960-r2038-re0 rpd[22371]: bgp_handle_notify:5227: NOTIFICATION received from 192.168.1.2 (External AS 65020): code 4 (Hold Timer Expired Error), socket buffer sndacc: 57 rcvacc: 0 , socket buffer sndccc: 57 rcvccc: 0 TCP state: 5, snd_una: 48080921 snd_nxt: 48080978 snd_wnd: 17376 rcv_nxt: 3004625702 rcv_adv: 3004642065, hold timer 90s, hold timer remain 0s, last sent 8s, TCP port (local 179, remote 55275)
+Apr 30 06:24:07.594  jtac-mx960-r2038-re0 mgd[521]: UI_CMDLINE_READ_LINE: User 'labroot', command 'show log messages | match 192.168.1.2 | no-more '
+Apr 30 06:50:52.080  jtac-mx960-r2038-re0 rpd[22371]: bgp_handle_notify:5227: NOTIFICATION received from 192.168.1.2 (External AS 65020): code 4 (Hold Timer Expired Error), socket buffer sndacc: 57 rcvacc: 0 , socket buffer sndccc: 57 rcvccc: 0 TCP state: 5, snd_una: 1828137525 snd_nxt: 1828137582 snd_wnd: 16384 rcv_nxt: 2216043470 rcv_adv: 2216060825, hold timer 90s, hold timer remain 0s, last sent 5s, TCP port (local 56811, remote 179)
+Apr 30 06:50:54.060  jtac-mx960-r2038-re0 rpd[22371]: bgp_pp_recv:5998: NOTIFICATION sent to 192.168.1.2+62294 (proto): code 6 (Cease) subcode 7 (Connection Collision Resolution), Reason: dropping 192.168.1.2+62294 (proto), connection collision prefers 192.168.1.2 (External AS 65020)
+
+
+On setup 2 with 2 router setup, BGP session has flapped only once in past 18 hours. 
+
+Apr 30 03:03:24.286  jtac-mx480-r2053-re0 rpd[32084]: BGP_IO_ERROR_CLOSE_SESSION: BGP peer 192.168.2.1 (External AS 65110): Error event Operation timed out(60) for I/O session - closing it (instance master)
+Apr 30 03:03:24.305  jtac-mx480-r2053-re0 rpd[32084]: bgp_io_mgmt_cb:3103: NOTIFICATION sent to 192.168.2.1 (External AS 65110): code 4 (Hold Timer Expired Error), Reason: holdtime expired for 192.168.2.1 (External AS 65110), socket buffer sndacc: 57 rcvacc: 0 , socket buffer sndccc: 57 rcvccc: 0 TCP state: 4, snd_una: 1251559927 snd_nxt: 1251559984 snd_wnd: 17376 rcv_nxt: 582267426 rcv_adv: 582283810, hold timer 90s, hold timer remain 0s, last sent 27s, TCP port (local 179, remote 58981)
+Apr 30 03:04:03.238  jtac-mx480-r2053-re0 rpd[32084]: bgp_recv: read from peer 192.168.2.1 (External AS 65110) failed: Connection reset by peer
+
+
+![[Pasted image 20260430141412.png]]
+jtac-mx960-r2038-re0
+
+set logical-systems LS1-LAB-MX960-04 interfaces lo0 unit 1 family inet filter output LOCAL_BGP
+set interfaces lo0 unit 0 family inet filter output LOCAL_BGP
+set firewall family inet filter LOCAL_BGP term 1 from protocol tcp
+set firewall family inet filter LOCAL_BGP term 1 from port bgp
+set firewall family inet filter LOCAL_BGP term 1 then count test
+set firewall family inet filter LOCAL_BGP term 1 then log
+set firewall family inet filter LOCAL_BGP term 1 then loss-priority low
+set firewall family inet filter LOCAL_BGP term 1 then forwarding-class nc_premiumnrt
+set firewall family inet filter LOCAL_BGP term 1 then accept
+set firewall family inet filter LOCAL_BGP term 1 then dscp cs6
+set firewall family inet filter LOCAL_BGP term 2 then accept
+
+set class-of-service host-outbound-traffic forwarding-class nc_premiumnrt
+set class-of-service host-outbound-traffic dscp-code-point cs6
+deactivate class-of-service host-outbound-traffic
+
+
+![[Pasted image 20260430141430.png]]
+
+labroot@jtac-mx480-r2053-re0> show configuration | display set | match LOCAL_BGP 
+set interfaces lo0 unit 0 family inet filter output LOCAL_BGP
+set firewall family inet filter LOCAL_BGP term 1 from dscp cs6
+set firewall family inet filter LOCAL_BGP term 1 from protocol tcp
+set firewall family inet filter LOCAL_BGP term 1 from port bgp
+set firewall family inet filter LOCAL_BGP term 1 then count test
+set firewall family inet filter LOCAL_BGP term 1 then log
+set firewall family inet filter LOCAL_BGP term 1 then forwarding-class nc_premiumnrt
+set firewall family inet filter LOCAL_BGP term 1 then accept
+set firewall family inet filter LOCAL_BGP term 2 then accept
+
+set class-of-service host-outbound-traffic forwarding-class nc_premiumnrt
+set class-of-service host-outbound-traffic dscp-code-point cs6
+deactivate class-of-service host-outbound-traffic
+
+Kindly let us know why filter is not working for logical instances, for 2 router setup- only once flap in past 18 hours, is it normal?
+
+
+
+
 
 --------------
 
