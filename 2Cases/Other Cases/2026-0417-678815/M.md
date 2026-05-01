@@ -8,34 +8,123 @@ Junos: 23.2R2-S3.8
 ssh annaw@p-jtac-lnx02.juniper.net
 rsi-varlog /volume/CSdata/annaw/case/2026-0417-678815
 
-Juniper case analysis request
-Issue: BGP Session Flaps when the 1G link is fully congested in both directions
-log path: /volume/CSdata/annaw/case/2026-0417-678815
-Task: 
-1.bgp keepalive should use queue 3, but why no drop in queue 3 but bgp down
-
-
-![[Pasted image 20260417123618.png]]
-FPC 1            REV 20   750-063181   CAJH6433          MPC3E NG PQ & Flex Q
-# Nera config
-ge-1/2/0  ge-1/2/1
-    ge-1/2/0 {
-        gigether-options {
-            802.3ad ae11;
-        }
-    }
-    ge-1/2/1 {
-        gigether-options {
-            802.3ad ae22;
-        }
-    }
-
-xe-10/0/3
-xe-10/0/2
 
 
 
+--------------
 
+
+Hi @Tong Chee Loong,
+
+We have tested the congestion in below setups and could not see BGP flapping issue with the attached configuration.
+
+We have created an outbound firewall filter which will match locally generated BGP packets and map to Q3. This filter is attached to lo0 out direction. 
+We have used ARP hidden commands which will make ARP packets to go via Q3 instead of Q0. 
+Host outbound command is deactivated. 
+
+set system arp arp-request-bump-priority
+set system arp arp-reply-bump-priority
+
+
+Setup 1-
+image.png
+jtac-mx960-r2038-re0
+
+set logical-systems LS1-LAB-MX960-04 interfaces lo0 unit 1 family inet filter output LOCAL_BGP
+set interfaces lo0 unit 0 family inet filter output LOCAL_BGP
+set firewall family inet filter LOCAL_BGP term 1 from protocol tcp
+set firewall family inet filter LOCAL_BGP term 1 from port bgp
+set firewall family inet filter LOCAL_BGP term 1 then count test
+set firewall family inet filter LOCAL_BGP term 1 then log
+set firewall family inet filter LOCAL_BGP term 1 then loss-priority low
+set firewall family inet filter LOCAL_BGP term 1 then forwarding-class nc_premiumnrt
+set firewall family inet filter LOCAL_BGP term 1 then accept
+set firewall family inet filter LOCAL_BGP term 1 then dscp cs6
+set firewall family inet filter LOCAL_BGP term 2 then accept
+
+set class-of-service host-outbound-traffic forwarding-class nc_premiumnrt
+set class-of-service host-outbound-traffic dscp-code-point cs6
+deactivate class-of-service host-outbound-traffic
+
+set system arp arp-request-bump-priority
+set system arp arp-reply-bump-priority
+
+
+labroot@jtac-mx960-r2038-re0> show bgp summary                                
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 4 Peers: 4 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                       0          0          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+192.168.1.2           65020       1179       1169       0      94     8:50:52 Establ
+  inet.0: 0/0/0/0
+192.168.2.2           65120       1870       1860       0      32    14:05:08 Establ
+  inet.0: 0/0/0/0
+192.168.10.1          65000       2826       3105       0       2    23:31:58 Establ
+  inet.0: 0/0/0/0
+192.168.30.1          65100       2826       3106       0       3    23:31:59 Establ
+
+Setup 2-
+
+image.png
+jtac-mx960-r2038-re0
+>>>>>>>
+set interfaces lo0 unit 0 family inet filter output LOCAL_BGP
+set firewall family inet filter LOCAL_BGP term 1 from protocol tcp
+set firewall family inet filter LOCAL_BGP term 1 from port bgp
+set firewall family inet filter LOCAL_BGP term 1 then count test
+set firewall family inet filter LOCAL_BGP term 1 then log
+set firewall family inet filter LOCAL_BGP term 1 then loss-priority low
+set firewall family inet filter LOCAL_BGP term 1 then forwarding-class nc_premiumnrt
+set firewall family inet filter LOCAL_BGP term 1 then accept
+set firewall family inet filter LOCAL_BGP term 1 then dscp cs6
+set firewall family inet filter LOCAL_BGP term 2 then accept
+
+set class-of-service host-outbound-traffic forwarding-class nc_premiumnrt
+set class-of-service host-outbound-traffic dscp-code-point cs6
+deactivate class-of-service host-outbound-traffic
+
+set system arp arp-request-bump-priority
+set system arp arp-reply-bump-priority
+
+>>>>>
+jtac-mx960-r2053-re0
+
+set interfaces lo0 unit 0 family inet filter output LOCAL_BGP
+set firewall family inet filter LOCAL_BGP term 1 from dscp cs6
+set firewall family inet filter LOCAL_BGP term 1 from protocol tcp
+set firewall family inet filter LOCAL_BGP term 1 from port bgp
+set firewall family inet filter LOCAL_BGP term 1 then count test
+set firewall family inet filter LOCAL_BGP term 1 then log
+set firewall family inet filter LOCAL_BGP term 1 then forwarding-class nc_premiumnrt
+set firewall family inet filter LOCAL_BGP term 1 then accept
+set firewall family inet filter LOCAL_BGP term 2 then accept
+
+set class-of-service host-outbound-traffic forwarding-class nc_premiumnrt
+set class-of-service host-outbound-traffic dscp-code-point cs6
+deactivate class-of-service host-outbound-traffic
+
+
+set system arp arp-request-bump-priority
+set system arp arp-reply-bump-priority
+
+
+labroot@jtac-mx480-r2053-re0> show bgp summary    
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 2 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                       0          0          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+192.168.2.1           65110       1863       1870       0      24    14:05:31 Establ
+  inet.0: 0/0/0/0
+192.168.40.2          65140       4940       5463       0       0 1d 17:08:58 Establ
+  inet.0: 0/0/0/0
+
+Kindly check this and update us.
 
 -----------
 

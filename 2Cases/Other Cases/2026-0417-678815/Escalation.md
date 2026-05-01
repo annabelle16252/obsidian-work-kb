@@ -1,9 +1,15 @@
 
 
 
+No, you don't need that knob
 
+--------------
 
+Hi Naotaka,
 
+One more query, set chassis fpc 1 flexible-queuing-mode —> is this command still required for the BGP flapping?
+
+-----------------
 
 Naveen,
 I see host-output BGP packets are sent to Q3 now.

@@ -192,8 +192,12 @@ Central memory Subsystem
 # SIB 
 6 X SIB8 (JNP10008-SF5), BF ASIC
 ![[Pasted image 20260429103702.png]]
+Granular failure handling：
+Failure of one BF ASIC does not impact the entire SIB board – the failed BF ASIC can be taken out of fabric map, ==leaving the other two BFs on the SIB fully functional==. This feature reduces the switching fabric bandwidth by ONE BF ASIC instead of one SIB (SW support in future Evo release)
 
-23:23
+**SF5 New Feature: Selective Power shutdown**
+
+
 
 
 
