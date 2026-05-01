@@ -112,10 +112,13 @@ BXF package = 把这两颗 die + HBM die 一起封进一个 MCM package
 
 MCM 是一种封装技术：把多颗独立的裸 die（芯片）放在同一个基板上，封装成一个看起来像单颗芯片的 package，焊到 PCB 上。
 
-"BF-as-RETIMER" 的含义
-![[Pasted image 20260421121238.png]]
+LC 上的 BX ASIC ──→ [backplane] ──→ MT3775 Retimer ──→ BF ASIC
+                     信号衰减            ↑ 在这里重新整形信号
+
 BX 芯片 Fabric 侧用的是 XSR SERDES（省电 70%），但 XSR 只能走短距离（MCM 内部），无法直接驱动背板上的长距离 trace。
 解决方案：把一颗 BF die 和 BX die 封装在同一个 MCM 里。BF 在这里不做交换，只做 XSR→LR 的信号转换（retimer 角色）。封装里同时有 HBM 贴在 BX die 旁边。
+
+
 # VOQ
 VOQ 可以理解为“按目的出口拆分的虚拟队列”。它不是单纯一个 FIFO，而是很多个逻辑队列。
 在 BX 里，每个 7.2T datapath 有一个 VOQ Manager，维护 48K 个 VOQ。
@@ -190,16 +193,24 @@ Central memory Subsystem
 # HBM
 ![[Pasted image 20260428140216.png]]
 # SIB 
-6 X SIB8 (JNP10008-SF5), BF ASIC
+6 X SIB8 (JNP10008-SF5)
+SF5 SIB 板卡 (一块物理PCB)
+├── 3x BF ASIC ─── 做实际的 fabric 交换（数据包跨 LC 转发）
+├── 6x MT3775 Retimer ─── 做信号中继（解决信号完整性问题）
+├── 1x FPGA ─── 板级管理（电源时序、复位、中断）
+└── 1x PCIe Switch ─── 控制通路连接 RE
 ![[Pasted image 20260429103702.png]]
 Granular failure handling：
 Failure of one BF ASIC does not impact the entire SIB board – the failed BF ASIC can be taken out of fabric map, ==leaving the other two BFs on the SIB fully functional==. This feature reduces the switching fabric bandwidth by ONE BF ASIC instead of one SIB (SW support in future Evo release)
 
 **SF5 New Feature: Selective Power shutdown**
+在上一代 fabric （如 SF3）中，任何一个板上组件故障都会导致整块 SIB 下线，直接造成 16.6% 的全系统交换容量损失（因为 PTX10008 有 6 块 SIB，1/6 ≈ 16.6%）。这个粒度太粗了。
 
+![[Pasted image 20260501104944.png]]
+当某个功能组内发生 电源故障、过温、或其他硬件故障 时，只关闭该功能组，其余 4 个组继续正常工作。故障可以等到维护窗口再处理。
 
-
-
+带宽损失影响表
+![[Pasted image 20260501110116.png]]
 
 # PWR
 3 power supplies can be sufficient for powering the system. However all the 6 power supplies are requested to be physically inserted into the chassis even though some of them are not connected to power source. 
