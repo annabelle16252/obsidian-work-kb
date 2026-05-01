@@ -31,9 +31,16 @@ reboot
 > show chassis interoperability 
 Chassis Interoperability Mode: express5-enhanced
 
+regress@r2-RE0-re0> show chassis fpc detail 
 
+> show chassis fpc detail 
+Slot 2 information:
+  State                               Offline   
+  Reason                              FPC incompatible with interop config
+  PFE Type                            Express-4
 ```
 
+48:00
 
 
 
