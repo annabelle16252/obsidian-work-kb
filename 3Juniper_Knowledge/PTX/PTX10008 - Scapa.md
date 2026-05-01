@@ -14,8 +14,28 @@ chvrf iri ssh fpc0
 ![[Pasted image 20260418123214.png]]
 # FPC 
 与MX不同，PTX接口直接集成在fpc上，而非使用独立的FPC+PIC架构，所以PIC的位置永远是0.
-"Aegon – LC1301" - Express5 BX
-"Scapa - LC1201" - Scapa BT
+
+Express 4 (Scapa) — 上一代线卡（LC1201/LC1202）BT chip
+Express 5 (Aegon) — 新一代线卡（LC1301）BX chip
+
+Express5 引入了新的 CCL 协议版本和 cell 编码方式。在 default 模式下，Express5 必须降级兼容 Express4 的格式（比如 fabric 链路速率从 106.25G 降到 53.125G）。而 express5-enhanced 模式下可以用原生的高性能格式，发挥全部带宽和新特性。混用会影响Aegon性能。
+![[Pasted image 20260501122149.png]]
+
+```
+> show chassis interoperability 
+Chassis Interoperability Mode: default
+
+# set chassis interoperability express5-enhanced 
+reboot
+
+> show chassis interoperability 
+Chassis Interoperability Mode: express5-enhanced
+
+
+```
+
+
+
 
 ![[Pasted image 20260429101548.png]]
 Main board = 线卡主板，承载高速数据面器件与主互连
