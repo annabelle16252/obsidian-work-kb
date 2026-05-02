@@ -4,11 +4,11 @@
 - NGTV4
 - EVO
 - japanese tutor
-- Nisa开户
-- vs code
 - github copilot
 - health check 25/5
-- Mobile Teams
+- Nisa开户
+![[Pasted image 20260502155046.png]]
+
 
 
 

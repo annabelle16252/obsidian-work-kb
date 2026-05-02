@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
+                "file": "5Daily/NISA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PTX10008 - Scapa"
+              "title": "NISA"
             }
           }
         ]
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
+                "file": "5Daily/NISA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PTX10008 - Scapa"
+              "title": "Outline of NISA"
             }
           }
         ],
@@ -184,6 +184,12 @@
   },
   "active": "a0d8bd79c95afb99",
   "lastOpenFiles": [
+    "5Daily/To_Do.md",
+    "attachments/Pasted image 20260502155046.png",
+    "5Daily/NISA.md",
+    "5Daily/A.md",
+    "5Daily/temp.md",
+    "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
     "attachments/Pasted image 20260501122149.png",
     "attachments/Pasted image 20260501110116.png",
     "attachments/Pasted image 20260501105547.png",
@@ -200,8 +206,6 @@
     "Clippings/gi2mic_platform.c (revision 1316144) - OpenGrok cross reference for RELEASE_232_THROTTLEpfecommondriversmicgi2mic_platform.c.md",
     "Clippings",
     "2Cases/Other Cases/2026-0417-678815/Lab.md",
-    "5Daily/NISA.md",
-    "5Daily/temp.md",
     "2Cases/Process/Meetings.md",
     "1Tools/AI Tools/Skill/GNATS protocol.md",
     "attachments/Pasted image 20260430141430.png",
@@ -211,14 +215,9 @@
     "1Tools/AI Tools/rsi-explorer-JTAC.md",
     "1Tools/JTAC Tools/JTAC Tool.md",
     "2Cases/Other Cases/2026-0429-695320",
-    "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
-    "attachments/Pasted image 20260429103702.png",
-    "attachments/Pasted image 20260429101548.png",
     "1Tools/AI Tools/Obsidian.md",
     "1Tools/AI Tools/Github Copilot.md",
     "4Company/HPE.md",
-    "5Daily/A.md",
-    "5Daily/To_Do.md",
     "3Juniper_Knowledge/COS/A.md",
     "3Juniper_Knowledge/PTX/PTX10016 - Scapa.md",
     "3Juniper_Knowledge/PTX/PTX10003 - Brackla.md",
