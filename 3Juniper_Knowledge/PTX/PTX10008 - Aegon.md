@@ -40,9 +40,6 @@ Slot 2 information:
   PFE Type                            Express-4
 ```
 
-48:00
-
-
 
 ![[Pasted image 20260429101548.png]]
 Main board = 线卡主板，承载高速数据面器件与主互连
@@ -66,6 +63,63 @@ Recovers clean timing (clock/data recovery).
 Re-equalizes and cleans jitter/noise.
 Transmits a fresh, clean signal out the other side.
 So it is not forwarding packets at Layer 2/3, and it is not making routing decisions. It is a physical-layer helper.
+
+# SIB 
+6 X SIB8 (JNP10008-SF5)
+SF5 SIB 板卡 (一块物理PCB)
+├── 3x BF ASIC ─── 做实际的 fabric 交换（数据包跨 LC 转发）
+├── 6x MT3775 Retimer ─── 做信号中继（解决信号完整性问题）
+├── 1x FPGA ─── 板级管理（电源时序、复位、中断）
+└── 1x PCIe Switch ─── 控制通路连接 RE
+![[Pasted image 20260429103702.png]]
+Granular failure handling：
+Failure of one BF ASIC does not impact the entire SIB board – the failed BF ASIC can be taken out of fabric map, ==leaving the other two BFs on the SIB fully functional==. This feature reduces the switching fabric bandwidth by ONE BF ASIC instead of one SIB (SW support in future Evo release)
+
+**SF5 New Feature: Selective Power shutdown**
+在上一代 fabric （如 SF3）中，任何一个板上组件故障都会导致整块 SIB 下线，直接造成 16.6% 的全系统交换容量损失（因为 PTX10008 有 6 块 SIB，1/6 ≈ 16.6%）。这个粒度太粗了。
+
+![[Pasted image 20260501104944.png]]
+当某个功能组内发生 电源故障、过温、或其他硬件故障 时，只关闭该功能组，其余 4 个组继续正常工作。故障可以等到维护窗口再处理。
+
+带宽损失影响表
+![[Pasted image 20260501110116.png]]
+
+==Mixed SIB types are not supported==
+With Aegon SIB, PTX10008 chassis supports 2 different Fabric ASIC based SIBs – SF3 and SF5. Fabric configuration differs depending on SIB type.
+
+系统用 System-SIB-Type 决定最终 fabric 配置，这个类型的判定规则是：
+看“已插入的最低编号 SIB 槽位”里是什么类型的 SIB。
+例如：
+如果 slot 0 插的是 Scapa SIB，那么系统就按 Scapa/SF3 fabric 方式起来
+如果 slot 0 没有卡，而 slot 1 是 Aegon SIB，那系统就按 Aegon/SF5 fabric 方式起来
+
+Incompatible SIB will remain in offline state with below offline reason：
+```
+> show chassis sibs detail 
+Slot 5 information:
+  State                                 Offline   
+  Reason                              Incompatible with other SIBs
+
+```
+
+==Recommended steps to be followed in a maintenance window for SIB upgrade==
+Power down the system.
+Remove the Fan trays
+Replace all the SIBs.
+Plug back the Fan trays.
+Power up the system.
+# Software Architecture
+Aegon 复用 Scapa 的 EVO uLC 架构，把新的 Aegon SIB 和 LC1301 接进来。
+Master RE 上的 EVO 软件负责系统 bring-up 和管理。SIB/FPC 各自有本地进程负责 ASIC、retimer、fabric link 和端口管理；同时延续 GRES/应用 HA 的高可用能力。
+![[Pasted image 20260503095838.png]]
+
+==Salient RE Applications==
+hwdre 管 FRU 和平台框架
+fabricHub 做全局 fabric 编排
+fabspoked-fchip 在每张 SIB 上具体把 fabric 口和 BF/retimer 管起来。
+
+==Salient FPC Applications==
+hwdfpc: 
 
 # BXF
 ```
@@ -219,26 +273,6 @@ Central memory Subsystem
 
 # HBM
 ![[Pasted image 20260428140216.png]]
-# SIB 
-6 X SIB8 (JNP10008-SF5)
-SF5 SIB 板卡 (一块物理PCB)
-├── 3x BF ASIC ─── 做实际的 fabric 交换（数据包跨 LC 转发）
-├── 6x MT3775 Retimer ─── 做信号中继（解决信号完整性问题）
-├── 1x FPGA ─── 板级管理（电源时序、复位、中断）
-└── 1x PCIe Switch ─── 控制通路连接 RE
-![[Pasted image 20260429103702.png]]
-Granular failure handling：
-Failure of one BF ASIC does not impact the entire SIB board – the failed BF ASIC can be taken out of fabric map, ==leaving the other two BFs on the SIB fully functional==. This feature reduces the switching fabric bandwidth by ONE BF ASIC instead of one SIB (SW support in future Evo release)
-
-**SF5 New Feature: Selective Power shutdown**
-在上一代 fabric （如 SF3）中，任何一个板上组件故障都会导致整块 SIB 下线，直接造成 16.6% 的全系统交换容量损失（因为 PTX10008 有 6 块 SIB，1/6 ≈ 16.6%）。这个粒度太粗了。
-
-![[Pasted image 20260501104944.png]]
-当某个功能组内发生 电源故障、过温、或其他硬件故障 时，只关闭该功能组，其余 4 个组继续正常工作。故障可以等到维护窗口再处理。
-
-带宽损失影响表
-![[Pasted image 20260501110116.png]]
-
 # PWR
 3 power supplies can be sufficient for powering the system. However all the 6 power supplies are requested to be physically inserted into the chassis even though some of them are not connected to power source. 
 1. Electrical load may need only 3 PSUs. This is about watts for RE/FPC/SIB.
