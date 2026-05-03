@@ -3,13 +3,40 @@ ptx10008+lc1301 <<< NGTV4
 # Chassis
 ![[Pasted image 20260420110203.png]]
 ![[Pasted image 20260429095606.png]]
-# Commands #
-FPC AFT login:
+# Commands 
+==FPC AFT login==
+```
 start shell pfe network fpc0
+@r1-RE0-fpc0:pfe>  
+```
 
-FPC linux login:
+==FPC linux login==
+```
 start shell user root
 chvrf iri ssh fpc0 
+```
+
+==RE shell==
+```
+> start shell 
+[vrf:none] regress@r1-RE0-re0:~$ 
+```
+
+==Kernel sysfs nodes for new FRUs==
+```
+[vrf:none] regress@r1-RE0-re0:~$ cd /sys/devices/platform/jnx/card
+
+[vrf:none] root@r1-RE0-re0:/sys/devices/platform/jnx/card# cat fpc0/assembly_id 
+0x0dce
+
+[vrf:none] root@aegon-platsw-04-re0:/sys/devices/platform/jnx/card/fpc0# cat state
+Active
+
+```
+
+01:58
+
+
 # RCB 
 ![[Pasted image 20260418123214.png]]
 # FPC 
@@ -119,7 +146,67 @@ fabricHub 做全局 fabric 编排
 fabspoked-fchip 在每张 SIB 上具体把 fabric 口和 BF/retimer 管起来。
 
 ==Salient FPC Applications==
-hwdfpc: 
+hwdfpc:
+它是 FPC 侧的平台管理进程。
+职责包括：
+配合 hwdre 完成 FPC online,创建 logical PIC,监控 FPC 本地 sensors,处理相关 config/CLI
+在 Aegon 上，FPC local sensors 由 hwdfpc 管；而在 Scapa 上，这部分更多是 hwdre 管。
+
+fabspoked-pfe
+这是 FPC 侧 fabric 管理的核心进程。
+职责包括：
+管 BX 芯片里的 fabric blocks：fi、fo、fabrord,管理 BXF 里的 BF 部分和 Mediatek retimer,做 fabric link training / detraining / link fault monitoring,周期性拉统计、counter、interrupt，必要时抛 cmerror
+它就是运行在 PFE 角色上的 fabspoked，负责 line card 上 fabric 这一半。
+你可以把它理解成：SIB 上有 fabspoked-fchip，FPC 上就有 fabspoked-pfe，两边配合把 fabric 链路拉起来并持续监控。
+
+evo-cda-bx 和 evo-aftmand-bx
+这两个是 BX ASIC 的转发面应用。
+evo-cda-bx：做 BX ASIC 初始化和编程
+evo-aftmand-bx：把 forwarding state 编程到硬件里
+
+packetIO
+负责 host path setup 和 packet processing support。
+这块 PPT 提得不多，知道它是主机通路/报文上送相关即可。
+
+picd
+这是端口管理核心进程，职责很集中：
+发布 port state DDS 对象
+管 transceiver / optics
+管 port LED
+管 WAN side link training
+管 MAC / PCS / Benes / WANIO programming
+管 IFD 创建/删除和链路状态
+如果现场有人问：
+“端口起不来是谁管？”
+“光模块是谁认？”
+“IFD 谁创建？”
+大概率都先想到 picd。
+
+marvd / marvell-cpss-app / clockd
+marvd / marvell-cpss-app：line card 上的 Marvell switch 初始化与端口状态轮询
+clockd：PLL/时钟初始化与监控，给 ASIC、retimer 等组件提供时钟
+这几个属于“底座型配套进程”，通常在平台 bring-up 或硬件异常排查时会碰到。
+
+==HA==
+Aegon 继承 modular 系统的 GRES/HA 思路.
+RE 上参与 HA 的关键应用是 fabspoked-fchipX 和 fabricHub. PPT 里说这两个支持 hitless application restart。
+
+SIB 上的 PCI endpoint 需要在 master RE 和 backup RE 之间平滑接管. SIB 上的 PCI endpoints 会从 master RE hand over 到 backup RE，并且要做到让下游 BF/SuperCon 尽量感知不到。
+PCI endpoint = SIB 板上某个能通过 PCIe 被系统看到、管理、配置的硬件功能点。
+SIB 上有一个 PCI switch，它下面挂着多个 endpoint 比如：
+一个是 SuperCon SIB FPGA
+三个是 BF ASIC
+上游连到 master RE / backup RE
+当发生 RE switchover 时，这些 endpoint 的控制权要从 master RE 平滑切到 backup RE
+
+Apps can be manually restarted by using CLI command
+```
+> request system application restart node re0 app <app-name>
+ 	fabricHub – For FabricHub
+	fabspoked-fchip – For  Fchip Fabspoke
+	fabspoked-pfe - For  Pfe Fabspoke
+
+```
 
 # BXF
 ```
