@@ -91,7 +91,7 @@ Re-equalizes and cleans jitter/noise.
 Transmits a fresh, clean signal out the other side.
 So it is not forwarding packets at Layer 2/3, and it is not making routing decisions. It is a physical-layer helper.
 
-# SIB 
+# Fabric
 6 X SIB8 (JNP10008-SF5)
 SF5 SIB 板卡 (一块物理PCB)
 ├── 3x BF ASIC ─── 做实际的 fabric 交换（数据包跨 LC 转发）
@@ -135,6 +135,39 @@ Remove the Fan trays
 Replace all the SIBs.
 Plug back the Fan trays.
 Power up the system.
+
+==DP - data path==
+每个 BX ASIC 里有两个 DP，也就是 DP0 和 DP1,每个 DP 支撑大约 7.2T 的 WAN 带宽
+为了支撑这 7.2T，它会对应使用一组 fabric links 往 fabric 侧喷流量:
+72 private links
+18 shared links
+shared link 会被两个 DP 共享
+```
+LC1301
+  |- BXF0
+  |   |- BX0
+  |       |- DP0
+  |       |- DP1
+  |
+  |- BXF1
+      |- BX1
+          |- DP0
+          |- DP1
+```
+每个 DP 72 private links & 18 shared links /2= 81 links
+其中shared links一半是自己DP,另一半是给另一个 DP 用
+
+
+==fabric plane==
+不在 FPC或SIB 上，它是整个 chassis fabric 的逻辑平面，跨的是 FPC 侧 + SIB/fabric 侧 这整条通路，是把一组这样的 links 逻辑归成一个 plane：
+DP 在 FPC 上，位于 BX ASIC 内部
+BF ASIC 在 SIB/fabric card 上
+fabric link 是 FPC 上的 DP 连到 SIB 上的 BF 的链路
+
+Aegon has 18-plane system, each plane will have 2 links from Scapa PFE and 4.5 links from BX PFE. The 0.5 is possible because each shared link can carry 50% traffic from itself and 50% from sibling PFE
+
+
+
 # Software Architecture
 Aegon 复用 Scapa 的 EVO uLC 架构，把新的 Aegon SIB 和 LC1301 接进来。
 Master RE 上的 EVO 软件负责系统 bring-up 和管理。SIB/FPC 各自有本地进程负责 ASIC、retimer、fabric link 和端口管理；同时延续 GRES/应用 HA 的高可用能力。
