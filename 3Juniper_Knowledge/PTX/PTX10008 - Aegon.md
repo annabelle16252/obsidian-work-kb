@@ -34,8 +34,19 @@ Active
 
 ```
 
-01:58
+# Fabric Commands
+```
+> show chassis fabric fpcs
+FPC #0
+    PFE #0
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok
+        SIB0_Asic1_Fcore0 (plane 1)  Plane Enabled, Links ok
+        SIB0_Asic2_Fcore0 (plane 2)  Plane Enabled, Links ok
+        SIB1_Asic0_Fcore0 (plane 3)  Plane Enabled, Links ok
 
+```
+p22
+02:19
 
 # RCB 
 ![[Pasted image 20260418123214.png]]
