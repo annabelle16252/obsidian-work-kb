@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
+                "file": "5Daily/NISA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PTX10008 - Aegon"
+              "title": "NISA"
             }
           }
         ]
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
+                "file": "5Daily/NISA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PTX10008 - Aegon"
+              "title": "Outline of NISA"
             }
           }
         ],
@@ -184,9 +184,9 @@
   },
   "active": "a0d8bd79c95afb99",
   "lastOpenFiles": [
+    "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
     "attachments/Pasted image 20260504112035.png",
     "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
-    "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
     "attachments/Pasted image 20260504110513.png",
     "attachments/Pasted image 20260504110218.png",
     "attachments/Pasted image 20260503095838.png",
@@ -204,7 +204,6 @@
     "2Cases/Other Cases/2026-0429-695320/M.md",
     "2Cases/Process/ARC-Japan.md",
     "attachments/Pasted image 20260501101420.png",
-    "attachments/Pasted image 20260501101356.png",
     "2Cases/Process/Singtel.md",
     "2Cases/Other Cases/2026-0429-695320/O.md",
     "Clippings/gi2mic_platform.c (revision 1316144) - OpenGrok cross reference for RELEASE_232_THROTTLEpfecommondriversmicgi2mic_platform.c.md",
