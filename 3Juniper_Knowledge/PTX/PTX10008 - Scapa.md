@@ -11,3 +11,5 @@ Each ZF is configured as 2 virtual planes
 
 Scapa 里的 BT PFE 有 36 条 fabric links：
 系统做成 36 fabric planes，每个 plane 放 1 条 link
+
+logical subchannel 

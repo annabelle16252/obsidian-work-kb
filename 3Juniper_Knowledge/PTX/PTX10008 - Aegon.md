@@ -166,7 +166,53 @@ fabric link 是 FPC 上的 DP 连到 SIB 上的 BF 的链路
 
 Aegon has 18-plane system, each plane will have 2 links from Scapa PFE and 4.5 links from BX PFE. The 0.5 is possible because each shared link can carry 50% traffic from itself and 50% from sibling PFE
 
+![[Pasted image 20260504110218.png]]
+BT DP 一共有 36 条 fabric links，所以平均到每个 plane：36/18=2
+BX DP一共有 72+9=81条 fabric links，所以平均到每个 plane：81/18=4.5
 
+![[Pasted image 20260504110513.png]]
+
+==SOT (Start Of Transaction)==
+作用：shared link 把两个 DP 的流量混在了一条 link 上，所以必须额外有一个机制区分“来源是谁”。
+同一条 shared link 上传输 cell
+  -> 在起始处打一个标记
+  -> SOT 表示来自 DP0
+  -> SOT1 表示来自 DP1
+  -> BF/fabric 侧据此知道 source PFE / source DP 是谁
+
+SOT是Aegon only的概念，当Aegon line card 和 Scapa SIB 的组合时，
+因为ZF fabric 不支持，所以结论就是：
+在 SF5/BF 体系里，shared link 可以用。用 Aegon SIB (SF5) 时，Aegon FPC 可以做到 4.5 links per plane
+在旧 ZF/Scapa SIB 体系里，shared link 不能用。用 Scapa SIB (SF3/ZF) 时，Aegon FPC 只能按 2 links per plane 跑，因为 shared link not used
+
+![[Pasted image 20260504112035.png]]
+
+==Link Failure Senario==
+受影响的那个 BX DP 还能和别的 BX DP 在这个 plane 上通信，只是能力下降，plane 变成 partial/degraded。但不能再用这个 plane 和 BT 通信，应为spray 比例不再满足要求。
+1. BX private link failure
+   受影响 BX DP <-> BX : partial plane
+   受影响 BX DP <-> BT : cannot use plane
+
+2. BX shared link failure
+   受影响 BX DP0/DP1 <-> BX : partial plane
+   受影响 BX DP0/DP1 <-> BT : cannot use plane
+
+3. BT link failure
+   受影响 BT DP <-> BX : cannot use plane
+
+==BX Fabric Policer==
+Aegon/BX 这代在 fabric ingress 路径上新增了一个 policer，用来在 fabric 带宽不足时主动丢流，避免因为 fabric 降容后继续按满配 WAN 流量灌入而失控。因为BX的fabric一个plane有多条link，存在个别link坏掉的场景。而BT是一个plane一条link
+正常时：
+  所有 fabric links 都好
+  -> fabric 带宽完整
+  -> 不需要 fabric policer
+  -> policer 关闭
+异常时：
+  某些 fabric link down
+  -> fabric 带宽缩水
+  -> BX 发现 fabric 不够用了
+  -> 开启 fabric policer
+  -> 在进入 fabric 之前就做丢弃
 
 # Software Architecture
 Aegon 复用 Scapa 的 EVO uLC 架构，把新的 Aegon SIB 和 LC1301 接进来。
