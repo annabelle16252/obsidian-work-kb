@@ -88,11 +88,58 @@ SIB #0  Online
 ```
 
 ==Link Auto heal==
+在 24 小时窗口里，整个 plane 只有 3 次 auto-heal 机会/per plane。超过3次，，那条link被标记为fault，整个plane变成 partial/degraded plane。
+```
+> show chassis fabric errors autoheal
+Time                      Error log of first 100 errors
+2025-01-20 13:48:42 UTC   /Fpc[6]/Pfe[0]/Plane[10] Denied - Disabled by Config
+2025-01-24 10:20:55 UTC   /Fpc[1]/Pfe[3]/Plane[3] Requested
+2025-01-24 10:21:00 UTC   /Fpc[1]/Pfe[2]/Plane[15] Failed
+2025-02-20 14:39:47 UTC   /Fpc[3]/Pfe[1]/Plane[6] Denied - Exceeded Max Attempts
+2025-02-22 06:54:40 UTC   /Fpc[3]/Pfe[1]/Plane[6] Requested
+2025-02-22 06:54:40 UTC   /Fpc[3]/Pfe[1]/Plane[6] Success
 
 
+> show chassis fabric errors autoheal
+Time                      Error log of first 100 errors
+2025-01-20 13:48:42 UTC   /Fpc[6]/Pfe[0]/Plane[10] Denied - Disabled by Config
+2025-01-24 10:20:55 UTC   /Fpc[1]/Pfe[3]/Plane[3] Requested
+2025-01-24 10:21:00 UTC   /Fpc[1]/Pfe[2]/Plane[15] Failed
+2025-02-20 14:39:47 UTC   /Fpc[3]/Pfe[1]/Plane[6] Denied - Exceeded Max Attempts
+2025-02-22 06:54:40 UTC   /Fpc[3]/Pfe[1]/Plane[6] Requested
+2025-02-22 06:54:40 UTC   /Fpc[3]/Pfe[1]/Plane[6] Success
 
+```
 
+手工触发一次auto-heal
+```
+> request chassis fabric link-autoheal ?
+Possible completions:
+  fpc                  FPC number
+  pfe                  PFE number
+  plane                Plane number
+Manual cli command to trigger autoheal:
+> request chassis fabric link-autoheal fpc 0 pfe 0 plane 0
+Link-autoheal is a hidden key word
+Which ever links are in fault state, they will get retrained
 
+```
+
+用 force 强制把整个 plane 的 links 都 retrain
+```
+When force option is used, all the links of the plane are retrained
+force is a hidden keyword
+The behaviour of Scapa is not changed with or without keyword force
+
+request chassis fabric link-autoheal fpc 0 pfe 0 plane 0 force
+
+Config command to disable link autoheal (hidden config):
+
+set chassis fabric event link-failure action autoheal-disable
+
+```
+
+p30
 
 
 
