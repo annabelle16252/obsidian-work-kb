@@ -35,6 +35,7 @@ Active
 ```
 
 # Fabric Commands
+==Check fabric link==
 ```
 > show chassis fabric fpcs
 FPC #0
@@ -44,9 +45,57 @@ FPC #0
         SIB0_Asic2_Fcore0 (plane 2)  Plane Enabled, Links ok
         SIB1_Asic0_Fcore0 (plane 3)  Plane Enabled, Links ok
 
+> show chassis fabric fpcs extended
+Fabric management FPC state:
+FPC #0
+    PFE #0
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(3,06)->FPC00FE0(1,08)
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(4,01)->FPC00FE0(2,02)
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(3,04)->FPC00FE0(2,04)
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(3,07)->FPC00FE0(2,06)
+        
+FPC #0
+     PFE #1
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(3,01)->FPC00FE1(7,00)
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(3,05)->FPC00FE1(6,06)
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(2,05)->FPC00FE1(2,00)
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(2,06)->FPC00FE1(1,06)
+        SIB0_Asic0_Fcore0 (plane 0)  Plane Enabled, Links ok SIB00F0(3,00)->FPC00FE1(8,00)  Shared link
+
+
+Plane 0一共有4个link，但plane 1有4.5个包含sharelink。
+原因是 Aegon 的 plane 带宽是 4.5 links per plane，这个 0.5 不可能真的拆成半根物理线，所以实现方式是：
+一部分带宽来自本 PFE 自己直接连出去的 4 条 private links
+剩下那 0.5 的能力，靠一条 shared link 来补
+这条 shared link 由 sibling PFE 之一“持有/显示”，但能承载两边的 traffic
+
+SIB00F0(3,04)->FPC00FE0(2,04)：这条link在SIB侧和PFE侧的fabric endpoint内部编号
+
 ```
-p22
-02:19
+
+```
+> show chassis fabric sibs extended
+Fabric management SIB state:
+SIB #0  Online
+    Asic #0 Fcore #0 (plane 0) Active
+        FPC #0
+            PFE #0  : Links ok             FPC00FE0(1,08)->SIB00F0(3,06)
+            PFE #0  : Links ok             FPC00FE0(2,02)->SIB00F0(4,01)
+            PFE #0  : Links ok             FPC00FE0(2,04)->SIB00F0(3,04)
+            PFE #0  : Links ok             FPC00FE0(2,06)->SIB00F0(3,07)
+            PFE #1  : Links ok             FPC00FE1(7,00)->SIB00F0(3,01)
+
+```
+
+==Link Auto heal==
+
+
+
+
+
+
+
+
 
 # RCB 
 ![[Pasted image 20260418123214.png]]
