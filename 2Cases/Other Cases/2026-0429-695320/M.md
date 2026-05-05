@@ -3,6 +3,66 @@
 
 
 
+Hi Naveen,
+
+I do not think this is an L1 issue, as the interfaces are showing "up up" before the MIC reboot, yet the traffic monitoring graph showed that traffic did drop without any warning. We perform show interface diagnostic optics and laser power is within the operational range. We have to reboot the MIC and reinitialize the sfp with shell command in order to recover the interface traffic.
+
+-------------------
+
+Hi @Neo Bo Sheng,
+
+Can you let us know if the ge-3/0/1, ge-3/0/3, ge-3/0/4,ge-3/1/4,ge-3/1/6,ge-3/1/7 ports are connected to a common patch panel/transit path/neighbor.
+If any changes/activity that might affect these ports on local/transit/remote?
+Any common features shared by these ports?
+
+
+---------------------
+
+Hi @Neo Bo Sheng,
+
+Yes, kindly share fresh output for ARP.
+
+-------------------
+
+Hi Naveen,
+
+
+1.
+Did you test self IP ping during troubleshooting? No
+2.
+Did you enable monitor traffic and see any packets ? No
+3.
+Can you share >show arp output from the node. In the RSI uploaded, there is the show arp no-resolve output. Let me know if you need a fresh output for that.
+4.
+Kindly confirm if the timestamp of syslog server logs is SGT? Yes
+5.
+From the monitor graph, we could see traffic was down on 28 April 15:45 SGT, this timestamp is same as CLI timestamp? Yes
+
+
+------------------
+
+
+Hi @Neo Bo Sheng,
+
+I am checking this case internally and require further below information.
+
+
+1.
+Did you test self IP ping during troubleshooting?
+2.
+Did you enable monitor traffic and see any packets ?
+3.
+Can you share >show arp output from the node.
+4.
+Kindly confirm if the timestamp of syslog server logs is SGT?
+5.
+From the monitor graph, we could see traffic was down on 28 April 15:45 SGT, this timestamp is same as CLI timestamp?
+
+We will update if any observations found.
+
+?Also note that we don’t have much logs to go with and RCA might be difficult with available data.
+Kindly involve us during issue period for live troubleshooting.
+
 ---------
 Hi Naveen,
 

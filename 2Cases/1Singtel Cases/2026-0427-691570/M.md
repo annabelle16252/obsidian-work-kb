@@ -2,6 +2,18 @@
 
 
 
+
+
+
+Hi,
+
+Junos versions- 23.4R2-S5, 21.2R3-S7.7, 21.2R3-S8.5, 21.4R3-S5.17, 23.2R2-S2.5 are not impacted by the CVE-2026-35385 as this CVE is not exploitable on Junos/EVO devices. Please refer to PR#1951875 - AT#51 for more information on this.
+
+Thanks,
+Melvina
+
+------------------
+
 Dear Tong,
 
 We have checked internally on this and found Junos version 23.2R2-S2.5 is not affected by the vulnerability CVE-2026-35385.
