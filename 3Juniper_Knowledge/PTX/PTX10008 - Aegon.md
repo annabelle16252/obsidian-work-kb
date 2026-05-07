@@ -139,9 +139,127 @@ set chassis fabric event link-failure action autoheal-disable
 
 ```
 
-p30
+==Fabric Healing==
+```
+root@aegon-platsw-05-re0:pfe> show jresil fhp trigger
+show jresil fhp trigger
+FPC      PFE     Fault
+ 
+0        2      PDG
+0        3      SDG
+ 
+2        0      PDG
+2        1      PDG
+2        2      PDG
+2        3      PDG
+2        4      PDG
+2        5      PDG
+2        6      PDG
+2        7      PDG
+2        8      PDG
+ 
+7        2      PDG
+7        3      SDG
+
+```
+
+哪些 plane / fpc / pfe 的 fabric link 被判为 faulty:
+```
+re0:pfe> show jresil fabHealth link
+Faulty fabric links
+ 
+Plane   Fpc     Pfe
+-------------------
+9       1       2
+       1       3
+       5       3
+       5       2
+-------------------
+10      1       2
+       1       3
+       5       3
+       5       2
+-------------------
+11      1       3
+       1       2
+       5       3
+       5       2
+
+```
+显示 healing 过程是否在进行中:
+```
+re0:pfe> show jresil fhp status
+show jresil fhp status
+ 
+FHP recovery status:           Fabric degradation detected, Action in progress
+Detected on:                   2024-05-06 21:47:07 PDT
+Action started:                2024-05-06 21:47:07 PDT
+ 
+Current phase:            SIB restart phase is completed
+Phase started:           2024-05-06 21:47:07 PDT
+    Restarted SIBs:           2 3
+    SIB  2: offline started at 2024-05-06 21:47:21 PDT
+             offline completed at: 2024-05-06 21:47:28 PDT
+             online started at: 2024-05-06 21:47:28 PDT
+             online completed at: 2024-05-06 21:49:51 PDT
+ 
+    SIB  3: offline started at 2024-05-06 21:50:05 PDT
+             offline completed at: 2024-05-06 21:50:14 PDT
+             online started at: 2024-05-06 21:50:14 PDT
+             online completed at: 2024-05-06 21:52:35 PDT
+
+```
+
+```
+> show chassis fabric reachability detail
+ 
+Fabric reachability status: Fabric degradation condition healed
+       Detected on                         : 2024-05-06 21:47:07 PDT
+       Reason                              : Fabric Degradation due to Plane faults
+ 
+Fabric reachability action:
+   Fabric reachability action              : SIB action
+   Current phase                           : Completed
+   Action started                          : 2024-05-06 21:47:07 PDT
+   Action completed                        : 2024-05-06 21:57:35 PDT
+       SIB restart phase                   : Completed
+           Phase started                   : 2024-05-06 21:47:07 PDT
+               SIBs restarted              : 2, 3
+           Phase completed                 : 2024-05-06 21:52:35 PDT
+ 
+Fabric reachability resolution: Fabric degradation condition healed after SIB restart phase
+
+```
+
+==link fault troubleshoot commands==
+```
+-> show chassis fabric sibs extended
+看 link/plane 是否异常
+
+-> show chassis fabric errors autoheal
+看 autoheal 有没有被请求、成功、失败，或者是否已经超过最大次数
+
+-> autoheal 成功
+-> 恢复
+
+-> autoheal 失败
+-> plane degraded/fault
+
+-> show chassis fabric degradation
+先看 Current Degrad(%) 和 Reqd/Curr Planes
+
+-> show chassis fabric degradation actions
+确认系统有没有因为退化已经开始动作
+
+-> show chassis fabric reachability detail
+确认是否已经从一般退化发展成 fabric reachability 问题
+
+-> show jresil fhp status
+如果已经触发 healing，就看它现在恢复到哪一步
+```
 
 
+p37
 
 
 # RCB 
@@ -321,6 +439,55 @@ Aegon/BX 这代在 fabric ingress 路径上新增了一个 policer，用来在 f
   -> 开启 fabric policer
   -> 在进入 fabric 之前就做丢弃
 
+==Fabric Healing==
+“Aegon 的 Fabric Healing 沿用 Scapa 的自愈框架，但适配了多链路 plane。它不是看到单条 fabric link 错就重启，而是先判断是否形成 blackhole 或 degradation，再按 SDG/PDG 分类，最后由 reachability/fhp 流程触发诸如 SIB restart 的恢复动作。”
+Self degradation (SDG)
+Peer degradation (PDG)
+
+link fault：
+-> link autoheal / retrain attempt
+-> 如果恢复成功：结束，不上升
+
+link fault persists
+-> plane degraded / partial plane fault
+-> 如果对 fabric capacity 或 reachability 影响还不大：继续运行，可能只是 degraded
+
+plane/fabric impact increases
+-> fabric degradation
+-> 达到 degradation 门槛后，触发 fabric healing action
+
+worst case
+-> blackhole
+-> 没有可用 plane 收发流量，触发更严重的恢复动作
+
+
+link fault commands:
+-> show chassis fabric sibs extended
+看 link/plane 是否异常
+
+-> show chassis fabric errors autoheal
+看 autoheal 有没有被请求、成功、失败，或者是否已经超过最大次数
+
+-> autoheal 成功
+-> 恢复
+
+-> autoheal 失败
+-> plane degraded/fault
+
+-> show chassis fabric degradation
+先看 Current Degrad(%) 和 Reqd/Curr Planes
+
+-> show chassis fabric degradation actions
+确认系统有没有因为退化已经开始动作
+
+-> show chassis fabric reachability detail
+确认是否已经从一般退化发展成 fabric reachability 问题
+
+-> show jresil fhp status
+如果已经触发 healing，就看它现在恢复到哪一步
+
+
+
 # Software Architecture
 Aegon 复用 Scapa 的 EVO uLC 架构，把新的 Aegon SIB 和 LC1301 接进来。
 Master RE 上的 EVO 软件负责系统 bring-up 和管理。SIB/FPC 各自有本地进程负责 ASIC、retimer、fabric link 和端口管理；同时延续 GRES/应用 HA 的高可用能力。
@@ -393,6 +560,13 @@ Apps can be manually restarted by using CLI command
 	fabspoked-pfe - For  Pfe Fabspoke
 
 ```
+
+==FOAM==
+FOAM – a fabric cell is sent out of FO and is checked that it is received back
+FOAM is not supported in the presence of ASIB8 (JNP10008-SF5)
+	- Multiple links in a plane
+	- The cell can come back on any of the links in a plane
+	- Both Scapa LC (LC1201, LC1202) and Aegon LC (LC1301) will not support FOAM
 
 # BXF
 ```
