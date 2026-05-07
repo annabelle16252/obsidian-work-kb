@@ -5,6 +5,20 @@ https://engage.cloud.microsoft/main/org/hpe.com/groups/eyJfdHlwZSI6Ikdyb3VwIiwia
 
 
 
+Dear Tong,
+
+CVE-2026-35385 , CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414 have been added into JSA80837.
+
+
+-------------
+
+
+Hi Ulf/Naveen/Travis,
+JSA80837 has been updated with the necessary details on these 5 SSH CVEs.
+
+-Melvina
+
+--------------------
 
 sirt@juniper.net
 
