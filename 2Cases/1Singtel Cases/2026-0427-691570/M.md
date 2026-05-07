@@ -1,7 +1,43 @@
 2026-0427-691570 - 20577 - SINGTEL -- IX - NERA -[Singtel:Singtel-IX:xn-sineq4-bo301] Checking for OpenSSH 10.3 CVE-2026-35385 for 23.2R2-S2.5| Ticket #20577
 
 
+https://engage.cloud.microsoft/main/org/hpe.com/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyNTAyNjM5MzcwMjQifQ/all
 
+
+
+
+sirt@juniper.net
+
+Hi SIRT team, 
+
+Could you let us know if CVE-2026-35385 , CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414 will be included in JSA80837.
+
+
+--------------
+
+
+Hi SIRT team, 
+
+Could you let us know if CVE-2026-35385 , CVE-2026-35386, CVE-2026-35387, CVE-2026-35388, CVE-2026-35414 will be included in JSA80837.
+
+Regards,
+
+Naveen Kumar Sivakumaran
+
+ARC Engineer 
+
+
+
+-------------
+
+Hi Naveen,
+ 
+Please check with the SIRT team if the five CVEs will be included in the following JSA.
+ 
+JSA80837:
+https://supportportal.juniper.net/s/article/2024-05-Reference-Advisory-Junos-OS-and-Junos-OS-Evolved-Multiple-CVEs-reported-in-OpenSSH
+ 
+--------------
 
 
 
