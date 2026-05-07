@@ -9,6 +9,9 @@ Login: annaw /Gemini@chatgpt.0217
 ssh2://jtac-tools.juniper.net (ID/PW: AD credential) 
 ssh2://p-jtac-lnx01.juniper.net (ID/PW: AD credential) 
 ssh2://p-jtac-lnx02.juniper.net (ID/PW: AD credential)
+
+# VM
+jtac-VM-Shared-toolbox-BNGL-53 (10.219.7.113) labroot/lab123
 # LRM Search 
 jtac-MX480*
 jtac-qnc-automation
