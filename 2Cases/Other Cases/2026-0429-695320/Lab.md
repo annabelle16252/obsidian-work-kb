@@ -5,23 +5,21 @@
 ge-5/2/0(traffic interface backbone)
 ge-5/3/0(spirent traffic) 
 
-sh /var/tmp/mx960_oam_toggle.sh
+start shell
+sh /var/tmp/mx960_oam_final.sh
 
 ```
-The script is designed to run from the MX960 local shell and automate repeated OAM flap testing against the peer MX480.
 
-It performs these actions in each round:
+The script runs on the MX960 and loops indefinitely until all peer pps values drop to 0:
 
-1. It starts on the MX960 and establishes an SSH control session to the peer device labroot@10.219.22.245. You enter the peer password once at the beginning, and the script reuses that session for all later peer checks.
-2. It locally deactivates protocols oam ethernet link-fault-management interface ge-6/0/1 on the MX960 and commits that change.
-3. It waits 5 seconds after the OAM deactivation commit.
-4. It performs rollback 1 on the MX960 to restore the previous OAM configuration and commits that rollback.
-5. It waits 15 seconds after the rollback commit.
-6. It connects to the peer MX480 and runs show interfaces ge-5/3/0 extensive | match pps | no-more.
-7. It extracts all pps values from that command output, not just the first two lines.
-8. It keeps polling the same peer command every 5 seconds until it gets at least 3 consecutive samples where the full set of pps values is exactly identical. That is the script’s definition of a stable output.
-9. If every pps value in that stable sample is 0, the script stops.
-10. If any pps value in that stable sample is non-zero, the script starts another round and repeats the full OAM deactivate/restore sequence.
+1. Disable OAM — Deactivates 802.3ah link-fault-management on ge-6/0/1 via "configure private" + commit.
+2. Wait 5 seconds for the OAM adjacency to drop.
+3. Restore OAM — Runs "rollback 1" + commit to re-activate the original OAM config.
+4. Wait 15 seconds for OAM to re-establish and traffic to reconverge.
+5. Poll peer MX480 pps — SSHs (passwordless, using an embedded RSA key) to MX480 and runs "show interfaces ge-5/3/0 extensive | match pps" to extract all pps values (input/output at physical and logical levels).
+6. Stability check — Repeats the pps query every 5 seconds until 3 consecutive identical samples are observed (up to 30 attempts).
+7. Zero check — If all stable pps values are 0, the script stops immediately (traffic loss detected). Otherwise, it proceeds to the next round.
 
-By default, it will keep doing this until all stable peer pps values become zero, or until it hits the configured maximum round limit.
+The script runs until pps drops to 0 — there is no round limit. Use Ctrl-C to stop manually if needed.
+
 ```
