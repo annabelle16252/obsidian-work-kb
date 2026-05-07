@@ -11,6 +11,45 @@ rsi-varlog /volume/CSdata/annaw/case/2026-0417-678815
 
 
 
+
+
+
+
+----------------
+Hi Naveen,
+ 
+I have tested your commands in Nera lab and BGP did not flap.
+ 
+I will test it with iBGP for the 1G link and get back to you.
+ 
+ 
+cheeloong.tong@lab-MX960-3d-04-P3-re0> show bgp summary
+May 07 09:46:09
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 5 Peers: 5 Down peers: 3
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0              
+                       0          0          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.10.11.253           1000          0          0       0       0  1d 0:20:38 Idle 
+12.1.1.2              15092          0          0       0       0  1d 0:20:38 Idle 
+128.106.16.73          3758          0          0       0       0  1d 0:20:38 Idle 
+192.168.1.2           65020       2563       2673       0       1    20:08:13 Establ
+  inet.0: 0/0/0/0
+192.168.10.1          65000       2459       2716       0       0    20:27:59 Establ
+  inet.0: 0/0/0/0
+ 
+ 
+ 
+nera@lab-mx480-3d-03-re0> show bgp summary | match 192.168
+May 07 09:57:17
+192.168.0.15          65002          0          0       0       0  3d 0:30:26 Idle 
+192.168.1.1           65010       2687       2575       0       0    20:14:35 Establ
+192.168.20.1          65030       2471       2616       0       0    20:34:11 Establ
+192.168.110.6          1000       9674       9220       0       0  3d 0:26:44 Establ
+ 
+
 --------------
 
 
