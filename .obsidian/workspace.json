@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
+                "file": "2Cases/1Singtel Cases/2026-0427-691570/M.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PTX10008 - Aegon"
+              "title": "M"
             }
           }
         ]
@@ -154,13 +154,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
+                "file": "2Cases/1Singtel Cases/2026-0427-691570/M.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PTX10008 - Aegon"
+              "title": "Outline of M"
             }
           }
         ],
@@ -184,11 +184,13 @@
   },
   "active": "a0d8bd79c95afb99",
   "lastOpenFiles": [
+    "2Cases/Other Cases/2026-0429-695320/Lab.md",
+    "attachments/Pasted image 20260507091955.png",
+    "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
     "2Cases/Other Cases/2026-0429-695320/Escalation.md",
     "2Cases/Other Cases/2026-0429-695320/M.md",
     "2Cases/1Singtel Cases/2026-0427-691570/M.md",
     "5Daily/NISA.md",
-    "3Juniper_Knowledge/PTX/PTX10008 - Aegon.md",
     "attachments/Pasted image 20260504112035.png",
     "3Juniper_Knowledge/PTX/PTX10008 - Scapa.md",
     "attachments/Pasted image 20260504110513.png",
@@ -205,7 +207,6 @@
     "2Cases/Other Cases/2026-0417-678815/M.md",
     "2Cases/Other Cases/2026-0417-678815/Escalation.md",
     "2Cases/Process/ARC-Japan.md",
-    "attachments/Pasted image 20260501101420.png",
     "2Cases/Process/Singtel.md",
     "2Cases/Other Cases/2026-0429-695320/O.md",
     "Clippings/gi2mic_platform.c (revision 1316144) - OpenGrok cross reference for RELEASE_232_THROTTLEpfecommondriversmicgi2mic_platform.c.md",
@@ -220,8 +221,6 @@
     "2Cases/Other Cases/2026-0429-695320",
     "1Tools/AI Tools/Obsidian.md",
     "1Tools/AI Tools/Github Copilot.md",
-    "4Company/HPE.md",
-    "3Juniper_Knowledge/COS/A.md",
     "Daily",
     "Company",
     "Tools/JTAC Tools",
